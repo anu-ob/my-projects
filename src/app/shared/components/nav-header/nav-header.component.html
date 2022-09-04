@@ -1,0 +1,178 @@
+
+<header>
+  <div class="container-header">
+    <div class="row blue">
+      <div class="col-md-12 col-sm-12 col-lg-3 col-xl-3  nav">
+        <ul class="navbar-nav mr-auto w-100 justify-content-end">
+          <li class="nav-item active" routerLinkActive="ActiveClass" [routerLinkActiveOptions]="{exact:true}" (click)="onStudent()" *ngIf="!(this.loginData || this.crLoginData)">
+            <a class="nav-link" [routerLink]="['/']"
+              >Student <span class="sr-only">(current)</span></a
+            >
+          </li>
+          <li  class="nav-item" routerLinkActive="myActiveClass" (click)="onCorporate()" *ngIf="!(this.loginData || this.crLoginData)">
+            <a class="nav-link" [routerLink]="['/corporate']">Employers</a>
+          </li>
+          <li class="nav-item" (click)="onStudent()" *ngIf="this.loginData && this.loginUser">
+            <a class="nav-link"
+              >Student <span class="sr-only">(current)</span></a
+            >
+          </li>
+          <li  class="nav-item" (click)="onCorporate()" *ngIf="this.crLoginData &&  this.crLoginUser">
+            <a class="nav-link">Employers</a>
+          </li>
+        </ul>
+      </div>
+      <div class="col-md-12 col-sm-12 col-lg-9 col-xl-9"></div>
+    </div>
+    <div class="row">
+      <div class="col-md-12 col-sm-12 col-lg-3 col-xl-3 mob-layout">
+        <div class="logo">
+          <a href="#">
+            <img
+              src="assets/images/qlogo.png"
+              class="img-responsive"
+              alt="logo"
+            />
+          </a>
+        </div>
+        <div class="mob-menu">
+          <nav class="navbar sticky-top navbar-expand-lg">
+            <div class="container">
+              <button
+                class="navbar-toggler"
+                type="button"
+                data-toggle="collapse"
+                data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent"
+                aria-expanded="false"
+                aria-label="Toggle navigation"
+              >
+                <i class="fa fa-bars"></i>
+              </button>
+              <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto w-100 justify-content-end">
+                  <!-- <li class="nav-item active">
+                            <a class="nav-link" href="index.html">Student <span class="sr-only">(current)</span></a>
+                          </li>
+                          <li class="nav-item">
+                            <a class="nav-link" href="#">Corporate</a>
+                          </li> -->
+                  <li class="nav-item">
+                    <a class="nav-link" [routerLink]="['/job-search']"
+                      >Job Listing</a
+                    >
+                  </li>
+
+                  <li class="nav-item">
+                    <a class="nav-link" [routerLink]="['/contact-us']"
+                      >Contact Us</a
+                    >
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" [routerLink]="['/about-us']"
+                      >About Us</a
+                    >
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="#"
+                      ><i class="fa fa-phone"></i> 1800-102-5558</a
+                    >
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </nav>
+        </div>
+      </div>
+      <div class="col-md-12 col-sm-12 col-lg-9 col-xl-9">
+        <div class="main-menu" *ngIf="isStudent">
+          <ul class="nav">
+            <!-- <li class="active"><a href="index.html" class="active"> Student </a> </li>
+                  <li><a href="Corporate.html"> Corporate </a> </li> -->
+            <li><a [routerLink]="['/job-search']"> Job Listing </a></li>
+            <li><a [routerLink]="['/contact-us']"> Contact Us </a></li>
+            <li><a [routerLink]="['/about-us']"> About us </a></li>
+            <li>
+              <a href="#"> <i class="fa fa-phone"></i> 1800-102-5558</a>
+            </li>
+            <li *ngIf="!(this.loginData || this.crLoginData)">
+              <div class="dropdown">
+                <a [routerLink]="['/login']" class="dropbtn"
+                  >Login <i class="fa fa-sign-in"></i
+                ></a>
+                <!-- <div class="dropdown-content">
+            <a href="#">Candidate Login</a>
+            <a href="#">Corporate Login</a> --
+          </div> -->
+              </div>
+            </li>
+            <li *ngIf="!(this.loginData || this.crLoginData)">
+              <div class="dropdown">
+                <a [routerLink]="['/sign-up']" class="dropbtn"
+                  >Register <i class="fa fa-user-plus"></i>
+                </a>
+                <!-- <div class="dropdown-content">
+            <a href="#">Candidate Register</a>
+            <a href="#">Corporate Register</a>
+          </div> -->
+              </div>
+            </li>
+            <li *ngIf="loginData && loginUser && userProfile === true">
+              <a [routerLink]="['/user']"> Dashboard</a>
+            </li>
+            <li
+              *ngIf="this.crLoginData && this.crLoginUser && this.crProfile === true"
+            >
+              <a [routerLink]="['corporate-home']"> Dashboard</a>
+            </li>
+            <li *ngIf="this.loginData || this.crLoginData">
+              <a href="javascript:void" (click)="signOut()"
+                ><i class="fa fa-sign-out"></i> Logout</a
+              >
+            </li>
+          </ul>
+        </div>
+        <div class="main-menu" *ngIf="!isStudent">
+          <ul class="nav">
+            <!-- <li class="active"><a href="index.html" class="active"> Student </a> </li>
+                  <li><a href="Corporate.html"> Corporate </a> </li> -->
+            <li class="nav-item" ><a class="nav-link" [routerLink]="['/job-search']"   [routerLinkActiveOptions]="{exact: true}" > Job Listing </a></li>
+            <li class="nav-item" ><a class="nav-link" [routerLink]="['/contact-us']"> Contact Us </a></li>
+            <li class="nav-item"><a class="nav-link" [routerLink]="['/about-us']"> About us </a></li>
+            <li class="nav-item" >
+              <a class="nav-link" href="#"> <i class="fa fa-phone"></i> 1800-102-5558</a>
+            </li>
+            <li class="nav-item"  *ngIf="!(this.loginData || this.crLoginData)">
+              <div class="dropdown">
+                <a [routerLink]="['/corporate-login']" class="dropbtn nav-link"
+                  >Login<i class="fa fa-sign-in"></i
+                ></a>
+              </div>
+            </li>
+            <li class="nav-item">
+              <div
+                class="dropdown"
+                *ngIf="!(this.loginData || this.crLoginData)"
+              >
+                <a [routerLink]="['/corporate-sign-up']" class="dropbtn nav-link"
+                  >Register <i class="fa fa-user-plus"></i>
+                </a>
+              </div>
+            </li>
+           <li class="nav-item"
+            *ngIf="this.crLoginData && this.crLoginUser && this.crProfile === true"
+          >
+            <a class="nav-link" [routerLink]="['/corporate-home']"> Dashboard</a>
+          </li>
+
+            <li class="nav-item" *ngIf="this.loginData || this.crLoginData">
+              <a href="javascript:void" (click)="signOut()"
+                ><i class="fa fa-sign-out"></i> Logout</a
+              >
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>

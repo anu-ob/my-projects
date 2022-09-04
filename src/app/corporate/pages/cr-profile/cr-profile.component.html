@@ -1,0 +1,139 @@
+<div class="how-section1 section login-bg-img">
+    <div class="row">
+      <div class="col-md-12 how-img sec1-left-img">               
+      </div>
+    </div>
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12 no-padding">
+          <div class="section-container-left">
+            <div class="heading-title">
+              <h2 class="white">Profile Information</h2>
+              <p>Having great skills and specialty in software quality assurance, software testing, software requirement.</p>
+            </div>
+          </div>
+         </div>
+      </div>
+    </div>
+  </div>
+  <div class="section2 section">
+    <div class="row">
+      <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 col-md-offset-3 col-lg-offset-3 mx-auto">
+        <div class="login-sec mb-60">
+            <div class="row">
+              <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 ">
+                <div class="qz-form-left">
+                <div class="login-form-heading">
+                  <h3 class="white">Add Profile</h3>
+                </div>
+                <form id="qz-login-form-data" novalidate="" [formGroup]="profileForm" (ngSubmit)="onSubmit(profileForm.value)" >
+                  
+                  <div class="col-lg-6 col-md-12 col-sm-6 col-xs-12">
+                    <div class="form-group">
+                      <label>Your First Name</label>
+                      <input placeholder="Your First Name" class="form-control" type="text" name="qz_user_fname" id="qz_user_fname" autocomplete="off" formControlName="first_name">
+                      <div class="invalid-feedback" *ngIf="isSubmitted && profileForm.controls.first_name.errors?.required">
+                      <sup>*</sup>This field is required
+                    </div>
+                    </div>
+                  </div>
+                  <div class="col-lg-6 col-md-12 col-sm-6 col-xs-12">
+                    <div class="form-group">
+                      <label>Your Last Name</label>
+                       <input placeholder="Your Last Name" class="form-control" type="text" name="qz_user_lname" id="qz_user_lname" autocomplete="off" formControlName="last_name">
+                       <div class="invalid-feedback" *ngIf="isSubmitted && profileForm.controls.last_name.errors?.required">
+                        <sup>*</sup>This field is required
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-lg-6 col-md-12 col-sm-6 col-xs-12">
+                    <div class="form-group">
+                      <label>Company Name</label>
+                      <input placeholder="Company Name" class="form-control" type="text" name="qz_user_creg" id="qz_user_creg" autocomplete="off" formControlName="company_name">
+                      
+                       <div class="invalid-feedback" *ngIf="isSubmitted && profileForm.controls.company_name.errors?.required">
+                        <sup>*</sup>This field is required
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-lg-6 col-md-12 col-sm-6 col-xs-12">
+                    <div class="form-group">
+                      <label>Company Registration Number</label>
+                       <input placeholder="Company Registration Number" class="form-control" type="text" name="qz_user_creg" id="qz_user_creg" autocomplete="off" formControlName="company_registration_number">
+                       <div class="invalid-feedback" *ngIf="isSubmitted && profileForm.controls.company_registration_number.errors?.required">
+                        <sup>*</sup>This field is required
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-lg-6 col-md-12 col-sm-6 col-xs-12">
+                    <div class="form-group">
+                      <label>Company HQ</label>
+                       <input placeholder="Company HQ" class="form-control" type="text" name="qz_user_hq" id="qz_user_hq" autocomplete="off" formControlName="company_hq">
+                       <div class="invalid-feedback" *ngIf="isSubmitted && profileForm.controls.company_hq.errors?.required">
+                        <sup>*</sup>This field is required
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <div class="col-lg-6 col-md-12 col-sm-6 col-xs-12">
+                    <div class="form-group">
+                      <label>Company Profile</label>
+                       <textarea placeholder="Company Profile" class="form-control" name="sb_reg_pro" id="sb_reg_pro" autocomplete="off" formControlName="company_profile">
+                       </textarea>
+                       <div class="invalid-feedback" *ngIf="isSubmitted && profileForm.controls.company_profile.errors?.required">
+                        <sup>*</sup>This field is required
+                      </div>
+                    </div>
+                   </div>
+                   <div class="col-lg-6 col-md-12 col-sm-6 col-xs-12">
+                    <div class="form-group">
+                      <label>Company Address</label>
+                       <textarea placeholder="Company Address" class="form-control" name="sb_user_addr" id="sb_user_addr" autocomplete="off" formControlName="complete_address">
+                       </textarea>
+                       <div class="invalid-feedback" *ngIf="isSubmitted && profileForm.controls.complete_address.errors?.required">
+                        <sup>*</sup>This field is required
+                      </div>
+                    </div>
+                   </div>
+                   <div class="col-lg-6 col-md-12 col-sm-6 col-xs-12">
+                    <div class="form-group">
+                        <label>Company Type</label>
+                        <select class="form-select" aria-label="Default select example" (change)="onCompanyChange($event)"
+                        formControlName="company_type_id">
+                        <option selected value="null" disabled>Select Company Type</option>
+                        <option *ngFor="let data of companyType" [value]="[data._id,data.name]">{{data.name}}
+                        </option>
+                    </select> 
+                    <div class="invalid-feedback" *ngIf="isSubmitted && profileForm.controls.company_type_id.errors?.required">
+                        <sup>*</sup>This field is required
+                      </div>   
+                </div>
+                  </div>     
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">                   
+                    <div class="buttons-area">                           
+                       <div class="form-group check-div">
+                        <div class="icheckbox_square" style="position: relative;">
+                          <input type="checkbox" name="icheck_box" class="input-icheck-others" data-parsley-required="true" data-parsley-error-message="Please accept terms and conditions." data-parsley-multiple="icheck_box" formControlName="agreement_terms_conditions">
+                         
+                        </div>
+                        <p> I Agree <a href="" target="_blank">terms and conditions.</a></p>
+                       </div> 
+                       <div class="invalid-feedback" *ngIf="isSubmitted && profileForm.controls.agreement_terms_conditions.errors?.required">
+                        <sup>*</sup>This field is required
+                      </div>       
+                     
+                      <div class="btn-group">
+
+                        <button class="n-btn-flat btn-mid pull-right " type="submit" id="sb_register_submit">Submit Profile</button>
+                      </div>
+                    </div>
+                   </div>
+                 </form>
+                </div>
+              </div>
+            </div>
+          <!-- </form> -->
+        </div>
+      </div>
+    </div>
+  </div>

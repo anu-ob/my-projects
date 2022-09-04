@@ -1,0 +1,132 @@
+<section id="res-banner">
+  <img src="assets/images/resume.jpg">
+   <!--| ABOUT |--------------------------------------------------->
+<div id="pay">
+  <h2 class="display-4">Payment</h2>
+</div>
+</section>
+<section id="about-text">
+  <p class="text-bg">Get a featured profile and increase your visibility to recriters upto 3 times</p>
+</section>
+<section id="price_table">
+  <div class="container table-responsive py-5"> 
+    <div class="col-md-7">
+      <table class="table table-bordered table-hover">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">Benefits</th>
+            <th scope="col" class="text-center">Free</th>
+            <th scope="col" class="black-bg text-center">Paid</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">Digital Resume Creation</th>
+            <td><i class="fa fa-times" aria-hidden="true"></i></td>
+            <td class="grey-bg"><i class="fa fa-check" aria-hidden="true"></i></td>
+          </tr>
+          <tr>
+            <th scope="row">Digital Card</th>
+            <td><i class="fa fa-times" aria-hidden="true"></i></td>
+            <td class="grey-bg"><i class="fa fa-check" aria-hidden="true"></i></td>
+          </tr>
+          <tr>
+            <th scope="row">Chatting with Corporate</th>
+            <td><i class="fa fa-times" aria-hidden="true"></i></td>
+            <td class="grey-bg"><i class="fa fa-check" aria-hidden="true"></i></td>
+          </tr>
+           <tr>
+            <th scope="row">Applied Featured Jobs</th>
+           <td class="grey-bg"><i class="fa fa-check" aria-hidden="true"></i></td>
+            <td class="grey-bg"><i class="fa fa-check" aria-hidden="true"></i></td>
+          </tr>
+          <tr>
+            <th scope="row">Automatic Profile Update</th>
+            <td><i class="fa fa-times" aria-hidden="true"></i></td>
+            <td class="grey-bg"><i class="fa fa-check" aria-hidden="true"></i></td>
+          </tr>
+          <tr>
+            <th scope="row">Guaranteed Interview call from Recuiters</th>
+            <td><i class="fa fa-times" aria-hidden="true"></i></td>
+            <td class="grey-bg"><i class="fa fa-check" aria-hidden="true"></i></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="col-md-5">
+    <form name="pricing" action="" method="post" enctype="multipart/form-data">
+      <div class="card pricing_card">
+                <div class="row">
+                  <table class="table table-hover table-bordered table-responsive">
+                    <thead>
+                      <tr>
+                        <th scope="col">Name</th>
+                        <th scope="col">Type</th>
+                        <!-- <th scope="col">Duration</th> -->
+                        <th scope="col">Price</th>
+                        <th scope="col">Select</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let data of plansList; let i = index" [class.active]="i == HighlightRow">
+                        
+                        <td>{{data.name}}</td>
+                        <td>{{data.type}}</td>
+                        <td>{{data.price}}</td>
+                        <td><a href="javascript:void" (click)="clickedRow(i,data)">Select</a>
+                          </td>
+                      </tr>
+                     
+                    </tbody>
+                  </table>
+                  <button class="btn-block btn-blue" (click)="makePayment()"> 
+                    <span> 
+                      <span id="checkout">Proceed To Payment</span>
+                    </span> 
+                  </button>
+                    <!-- <div class="col-lg-12 radio-group"> 
+                         <div class="row d-flex px-3 radio">
+                           <div class="row d-flex justify-content-between px-4 o-color">
+                            <h4 class="mb-1 text-left">Resume Display</h4>
+                            <p class="mb-1 text-right">$23.49</p>
+                          </div>
+                          <div class="row d-flex justify-content-between px-4">
+                              <h4 class="mb-1 text-left">Adjusted Subtotal</h4>
+                              <p class="mb-1 text-right">$2.99</p>
+                          </div>
+                          <div class="row d-flex justify-content-between px-4" id="tax">
+                              <h4 class="mb-1 text-left"><strong>Payable Amount</strong></h4>
+                              <p class="mb-1 text-right"><strong>$26.48</strong></p>
+                          </div> 
+                       
+                        </div>
+                        
+                     
+                        
+                    </div>-->
+                    <!-- <div class="col-lg-5">
+                        <div class="row px-2">
+                            <div class="form-group col-md-6"> <label class="form-control-label">Name on Card</label> <input type="text" id="cname" name="cname" placeholder="Johnny Doe"> </div>
+                            <div class="form-group col-md-6"> <label class="form-control-label">Card Number</label> <input type="text" id="cnum" name="cnum" placeholder="1111 2222 3333 4444"> </div>
+                        </div>
+                        <div class="row px-2">
+                            <div class="form-group col-md-6"> <label class="form-control-label">Expiration Date</label> <input type="text" id="exp" name="exp" placeholder="MM/YYYY"> </div>
+                            <div class="form-group col-md-6"> <label class="form-control-label">CVV</label> <input type="text" id="cvv" name="cvv" placeholder="***"> </div>
+                        </div>
+                    </div> -->
+                    <div class="col-lg-4 mt-2">
+                        
+                    </div>
+                </div>
+            </div>
+      </form>
+    </div>
+  
+  </div>
+
+  </section>   
+  <section id="highlight" class="container text-center">
+    <h2 class="display-4 o-color">HIGHLIGHT YOUR PROFILE</h2>
+    <p class="">Your profile is marked as feature to make your stand out in quazi database as an active job seekers.</p>
+  </section>

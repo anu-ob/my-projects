@@ -1,0 +1,193 @@
+<!-- modal for forgot password -->
+<div class="custom-modal">
+    <div id="myModal" class="modal fade in" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="cp-spinner cp-skeleton"></div>
+                <div class="modal-header rte">
+                    <h2 class="modal-title">Forgot your password?</h2>
+                    <button type="button" #closebutton class="close" data-dismiss="modal">&times;</button>
+                </div>
+
+                <form id="qz-forgot-form" novalidate="" [formGroup]="forgetPasswordForm" (ngSubmit)="forgetPassword(forgetPasswordForm.value)">
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label>Email</label>
+                            <input placeholder="Your Email Where We Send You New Password" class="form-control"
+                                type="email" data-parsley-type="email" data-parsley-required="true"
+                                data-parsley-error-message="Please enter valid email." data-parsley-trigger="change"
+                                name="qz_forgot_email" id="sb_forgot_email" formControlName="email">
+                                <div class="invalid-feedback" *ngIf="isEmailSubmit && forgetPasswordForm.controls.email.errors?.required">
+                                    <sup>*</sup>This field is required.
+                                  </div>
+                                  <div class="invalid-feedback" *ngIf="forgetPasswordForm.controls.email.errors?.pattern">
+                                    <sup>*</sup>Please enter a valid email.
+                                   </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn n-btn-flat btn-mid btn-block" type="submit" id="closeModal">Reset My
+                            Account</button>
+                        <button class="btn btn-default" type="Submit" id="sb_forgot_msg"
+                            style="display: none;">Processing...</button>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+<!-- </div> -->
+<!-- end -->
+<div class="how-section1 section login-bg-img">
+    <div class="row">
+        <div class="col-md-12 how-img sec1-left-img">
+        </div>
+        <!-- <div class="col-md-6 sec1-right-img">
+          </div> -->
+    </div>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12 no-padding">
+                <div class="section-container-left">
+                    <div class="heading-title">
+                        <h2 class="white">Account SignIn</h2>
+                        <p>Having great skills and specialty in software quality assurance, software testing, software
+                            requirement.</p>
+
+                    </div>
+                    <!--  <img class="main-arrow" src="https://jobs.nokriwp.com/wp-content/uploads/2019/05/main-arrow.png" alt="image">  -->
+                </div>
+            </div>
+            <!--  <div class="col-md-6 col-sm-6 col-xs-12 no-padding">
+                            <div class="section-container-right">
+                              <h2>YOUR DREAM JOB IS WAITING</h2>
+                              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor.At vero eos et accusamus et iusto.</p>
+                              <a href="#" class="n-btn-flat btn-mid"> Apply Now </a>
+                          </div>
+                        </div> -->
+        </div>
+    </div>
+</div>
+<div class="section2 section">
+    <div class="row">
+        <div class="col-lg-10 col-md-10 col-sm-12 col-xs-12 col-md-offset-1 col-lg-offset-1 mx-auto">
+            <div class="login-sec mb-60">
+                <!-- <form action="#" class="career-form mb-60"> -->
+                <div class="row">
+                    <div class="col-lg-7 col-md-7 col-sm-12 col-xs-12 ">
+                        <div class="qz-form-left">
+                            <div class="login-form-heading">
+                                <h3 class="white">Login Using your email</h3>
+                            </div>
+                            <form id="qz-login-form-data" novalidate="" [formGroup]="loginForm" (ngSubmit)="onSubmit(loginForm.value)">
+                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                    <div class="form-group">
+                                        <input placeholder="email" class="form-control" type="email"
+                                            data-parsley-type="email" data-parsley-required="true"
+                                            data-parsley-error-message="Please enter your user_name"
+                                            data-parsley-trigger="change" name="qz_reg_email" id="sb_reg_email"
+                                            autocomplete="off" formControlName="email">
+                                            <div class="invalid-feedback" *ngIf="isSubmitted && loginForm.controls.email.errors?.required">
+                                                <sup>*</sup>This field is required
+                                              </div>  
+                                              <div class="invalid-feedback" *ngIf="loginForm.controls.email.errors?.pattern">
+                                                <sup>*</sup>Please enter a valid email.
+                                              </div>
+                                              <!--<div *ngIf="isSubmitted && loginForm.controls.email.errors?.pattern" class="invalid-feedback">
+                                                <sup>*</sup>Please enter valid email
+                                              </div>-->
+                                    </div>
+                                </div>
+                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                    <div class="form-group">
+                                        <input placeholder="your password" class="form-control" type="password"
+                                            data-parsley-required="true"
+                                            data-parsley-error-message="Please enter your password."
+                                            name="qz_reg_password" id="sb_reg_password" autocomplete="off" formControlName="password">
+                                            <div class="invalid-feedback" *ngIf="isSubmitted && loginForm.controls.password.errors?.required">
+                                                <sup>*</sup>This field is required.
+                                              </div>
+                                              
+                                            </div>
+                                </div>
+                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                  
+                                    <re-captcha
+                                    (resolved)="resolved($event)" formControlName="reCaptcha"
+                                    siteKey="6Ldh8j0cAAAAAKYdaVZF68svMjnSn3pCqh4nEgSF"
+                                     (error)="onError($event)" errorMode="handled"
+                                  ></re-captcha>
+                                  <div class="invalid-feedback" *ngIf="isSubmitted && loginForm.controls.reCaptcha.errors?.required">
+                                    <sup>*</sup>Please select the checkbox before submit.
+                                  </div>
+                                    <!--<div class="g-recaptcha form-group" name="contact-recaptcha"
+                                        data-sitekey="6Lc3I1cbAAAAAIMHS6lqiZGgKumPtcB4sXVDDHGM">
+                                        <div style="width: 304px; height: 78px;">
+                                            <div>
+                                                <iframe title="reCAPTCHA"
+                                                    src="https://www.google.com/recaptcha/api2/anchor?ar=1&amp;k=6Lc3I1cbAAAAAIMHS6lqiZGgKumPtcB4sXVDDHGM&amp;co=aHR0cHM6Ly9qb2JzLm5va3Jpd3AuY29tOjQ0Mw..&amp;hl=en&amp;v=ecapuzyywmdXQ5gJHS3JQiXe&amp;size=normal&amp;cb=w8anu84q3uh6"
+                                                    width="304" height="78" role="presentation" name="a-cnpq2uj7ki5l"
+                                                    frameborder="0" scrolling="no"
+                                                    sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-top-navigation allow-modals allow-popups-to-escape-sandbox"></iframe>
+                                            </div>
+                                            <textarea id="g-recaptcha-response" name="g-recaptcha-response"
+                                                class="g-recaptcha-response"  (resolved)="resolved($event)"
+                                                style="width: 250px; height: 40px; border: 1px solid rgb(193, 193, 193); margin: 10px 25px; padding: 0px; resize: none; display: none;" formControlName="reCaptcha">
+
+                            </textarea>
+                                        </div>
+                                        <iframe style="display: none;"></iframe>
+                                    </div>-->
+                                </div>
+                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                    <div class="form-group">
+                                        <a class="pull-left " data-target="#myModal" data-toggle="modal">Forget
+                                            Password</a>
+                                        <button class="n-btn-flat btn-mid pull-right " type="submit"
+                                            id="qz_login_submit">Login</button>
+                                    </div>
+                                </div>
+                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                    <div class="signup-area">
+                                        <p>Don't you have account?<a [routerLink]="['/sign-up']"> Sign up now</a></p>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="col-lg-5 col-md-5 col-sm-12 col-xs-12 nopadding">
+                        <div class="qz-form-right">
+                            <div class="login-form-heading">
+                                <h3>Using Social Accounts</h3>
+                            </div>
+                            <div class="form-group">
+                                <p class="white-p">mollis et mi. Morbi elementum, purus eu congue efficitur, justo dolor
+                                    condimentum
+                                    ex, at gravida nisi massa</p>
+                            </div>
+                            <div class="social-buttons">
+                                <div class="form-group">
+                                    <a (click)= "signInWithFB()" class="btn-facebook btn-block btn-social">
+                                        <!-- <i class="fa fa-facebook"></i> -->
+                                        <img src="/assets/images/fb-logo.png" class="img-resposive" alt="Facebook logo">
+                                        <span>Signin With facebook</span>
+                                    </a>
+                                </div>
+                                <div class="form-group">
+                                    <a (click)="signInWithGoogle()" class="btn-google btn-block btn-social">
+                                        <!-- <i class="fa fa-google"></i> -->
+                                        <img src="/assets/images/g-logo.png" class="img-resposive" alt="Google logo">
+                                        <span>Signin With Google</span>
+                                    </a>
+                                </div>
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- </form> -->
+            </div>
+        </div>
+    </div>
+</div>

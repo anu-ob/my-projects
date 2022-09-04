@@ -1,0 +1,589 @@
+
+<div class="how-section1 section index">
+  <div class="row">
+    <div class="col-md-6 how-img sec1-left-img"></div>
+    <div class="col-md-6 sec1-right-img"></div>
+  </div>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-6 col-sm-6 col-xs-12 no-padding">
+        <div class="section-container-left">
+          <h2>LOOKING FOR TOP RESOUCE?</h2>
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
+            eiusmod tempor.At vero eos et accusamus et iusto.
+          </p>
+          <div *ngIf="!this.loginUser">
+
+            <a  (click)="postJob()" class="n-btn-flat btn-mid">
+              Post Job
+            </a>
+          </div>
+          <img
+            class="main-arrow"
+            src="https://jobs.nokriwp.com/wp-content/uploads/2019/05/main-arrow.png"
+            alt="image"
+          />
+        </div>
+      </div>
+      <div class="col-md-6 col-sm-6 col-xs-12 no-padding">
+        <div class="section-container-right">
+          <h2>YOUR DREAM JOB IS WAITING</h2>
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
+            eiusmod tempor.At vero eos et accusamus et iusto.
+          </p>
+          <div *ngIf="!this.crUserLogin">
+
+            <a class="n-btn-flat btn-mid" [routerLink]="['/job-search']">
+              Apply Now
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="section2 section">
+    <div class="row search-forms">
+      <div class="col-lg-10 mx-auto col-md-10 col-md-offset-1 col-lg-offset-1">
+        <div class="career-search mb-60">
+          <form
+            action="#"
+            class="career-form mb-60"
+            [formGroup]="jobSearchForm"
+          >
+            <div class="row">
+              <div class="col-md-3 col-lg-3 col-sm-3 col-xs-12 my-3">
+                <div class="input-group position-relative">
+                  <input
+                    type="text"
+                    class="form-control"
+                    placeholder="Enter Your Keywords"
+                    id="keywords"
+                    formControlName="keyword"
+                  />
+                </div>
+              </div>
+              <div class="col-md-3 col-lg-3 col-sm-3 col-xs-12 my-3">
+                <div class="input-group position-relative ">
+                 
+                  <ng-autocomplete
+                  
+                  [data]="data"
+                  [searchKeyword]="keyword"
+                  (inputChanged)="getServerResponse($event)"
+                  [itemTemplate]="itemTemplate"
+                  (inputCleared)="searchCleared()"
+                  [debounceTime]="200"
+                  [isLoading]="isLoadingResult"
+                  formControlName="location"
+                  [placeholder]="keyword"
+                >
+                </ng-autocomplete>
+
+                <ng-template #itemTemplate let-item>
+                  <a href="javascript:void(0)">
+                    <div class="row">
+                      <div class="col-10">
+                        <span [innerHTML]="item"></span>
+                      </div>
+                    </div>
+                  </a>
+                </ng-template>
+                </div>
+              </div>
+              <div class="col-md-3 col-lg-3 col-sm-3 col-xs-12 my-3">
+                <div class="select-container">
+                  <select
+                    class="custom-select"
+                    (change)="onJobChange($event)"
+                    formControlName="jobType"
+                  >
+                    <option value="null" selected disabled>Category</option>
+                    <option *ngFor="let job of jobTypeList" [value]="job._id"
+                      >{{job.name}}</option
+                    >
+                  </select>
+                </div>
+              </div>
+              <div class="col-md-3 col-lg-3 col-sm-3 col-xs-12 my-3">
+                <button
+                  type="submit"
+                  class="n-btn-flat btn-mid"
+                  id="contact-submit"
+                  (click)="onSearch()"
+                >
+                  Search
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="section featured-jobs light-blue">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="row">
+          <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="heading-title black">
+              <h2>Featured Jobs</h2>
+              <p>
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
+                eiusmod tempor.At vero eos et accusamus et iusto odio
+                dignissimos ducimus qui blanditiis praesentium
+              </p>
+            </div>
+          </div>
+          <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="row">
+              <div class="mansi">
+                <div class="col-md-4 col-sm-6 col-xs-12 gap-2">
+                  <div class="featured-image-box">
+                    <div class="img-box">
+                      <img
+                        src="/assets/images/01-6.png"
+                        class="img-responsive center-block"
+                        alt="logo"
+                      />
+                    </div>
+
+                    <div class="content-area">
+                      <div class="">
+                        <h4><a href="#">Assistant Editor</a></h4>
+                        <p>
+                          Qazi ,
+                          <a href="#">Model Town</a>
+                        </p>
+                      </div>
+                      <div class="feature-post-meta">
+                        <a href="">
+                          <i class="fa fa-clock-o"></i> 3 years ago</a
+                        >
+                      </div>
+                      <div class="feature-post-meta-bottom">
+                        Pound 3000-4000 / Weekly
+                      </div>
+                      <div class="features-star">
+                        <i class="fa fa-star"></i>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-4 col-sm-6 col-xs-12 gap-2">
+                  <div class="featured-image-box">
+                    <div class="img-box">
+                      <img
+                        src="/assets/images/jornadas-nutricao-2017-ULSNE-1-150x150.png"
+                        class="img-responsive center-block"
+                        alt="logo"
+                      />
+                    </div>
+
+                    <div class="content-area">
+                      <div class="">
+                        <h4><a href="#">R&amp;D Manager</a></h4>
+                        <p>
+                          Delight King ,
+                          <a href="#">Pakistan</a>
+                        </p>
+                      </div>
+                      <div class="feature-post-meta">
+                        <a href="">
+                          <i class="fa fa-clock-o"></i> 3 years ago</a
+                        >
+                      </div>
+                      <div class="feature-post-meta-bottom">
+                        Rupees 2000-3000 / Hourly
+                      </div>
+                      <div class="features-star">
+                        <i class="fa fa-star"></i>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-4 col-sm-6 col-xs-12">
+                  <div class="featured-image-box">
+                    <div class="img-box">
+                      <img
+                        src="/assets/images/01-6.png"
+                        class="img-responsive center-block"
+                        alt="logo"
+                      />
+                    </div>
+
+                    <div class="content-area">
+                      <div class="">
+                        <h4><a href="#">Looking for HR…</a></h4>
+                        <p>
+                          Qazi ,
+                          <a href="#">Model Town</a>
+                        </p>
+                      </div>
+                      <div class="feature-post-meta">
+                        <a href="">
+                          <i class="fa fa-clock-o"></i> 3 years ago</a
+                        >
+                      </div>
+                      <div class="feature-post-meta-bottom">
+                        Dollar 1000-2000 / Weekly
+                      </div>
+                      <div class="features-star">
+                        <i class="fa fa-star"></i>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-4 col-sm-6 col-xs-12">
+                  <div class="featured-image-box">
+                    <div class="img-box">
+                      <img
+                        src="/assets/images/06-150x150.png"
+                        class="img-responsive center-block"
+                        alt="logo"
+                      />
+                    </div>
+
+                    <div class="content-area">
+                      <div class="">
+                        <h4><a href="#">Assistant Editor, Real…</a></h4>
+                        <p>
+                          GrandLeon ,
+                          <a href="#">USA</a>
+                        </p>
+                      </div>
+                      <div class="feature-post-meta">
+                        <a href="">
+                          <i class="fa fa-clock-o"></i> 3 years ago</a
+                        >
+                      </div>
+                      <div class="feature-post-meta-bottom">
+                        Dollar 300-400 / Monthly
+                      </div>
+                      <!-- <div class="features-star"><i class="fa fa-star"></i></div> -->
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-4 col-sm-6 col-xs-12">
+                  <div class="featured-image-box">
+                    <div class="img-box">
+                      <img
+                        src="/assets/images/01-1.png"
+                        class="img-responsive center-block"
+                        alt="logo"
+                      />
+                    </div>
+
+                    <div class="content-area">
+                      <div class="">
+                        <h4><a href="#">SEO Marketing Manager</a></h4>
+                        <p>
+                          MediaX Technologies ,
+                          <a href="#">USA</a>
+                        </p>
+                      </div>
+                      <div class="feature-post-meta">
+                        <a href="">
+                          <i class="fa fa-clock-o"></i> 3 years ago</a
+                        >
+                      </div>
+                      <div class="feature-post-meta-bottom">
+                        Dollar 1000-2000 / Monthly
+                      </div>
+                      <!--  <div class="features-star"><i class="fa fa-star"></i></div> -->
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-4 col-sm-6 col-xs-12">
+                  <div class="featured-image-box">
+                    <div class="img-box">
+                      <img
+                        src="/assets/images/01-1.png"
+                        class="img-responsive center-block"
+                        alt="logo"
+                      />
+                    </div>
+
+                    <div class="content-area">
+                      <div class="">
+                        <h4><a href="#">Sr. Mobile Application…</a></h4>
+                        <p>
+                          MediaX Technologies ,
+                          <a href="#">USA</a>
+                        </p>
+                      </div>
+                      <div class="feature-post-meta">
+                        <a href="">
+                          <i class="fa fa-clock-o"></i> 3 years ago</a
+                        >
+                      </div>
+                      <div class="feature-post-meta-bottom">
+                        Aed 1000-2000 / Monthly
+                      </div>
+                      <!-- <div class="features-star"><i class="fa fa-star"></i></div> -->
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-4 col-sm-6 col-xs-12">
+                  <div class="featured-image-box">
+                    <div class="img-box">
+                      <img
+                        src="/assets/images/05-1.png"
+                        class="img-responsive center-block"
+                        alt="logo"
+                      />
+                    </div>
+
+                    <div class="content-area">
+                      <div class="">
+                        <h4><a href="#">Data Entry Clerk…</a></h4>
+                        <p>
+                          Localhead Inc. Ltd. ,
+                          <a href="#">USA</a>
+                        </p>
+                      </div>
+                      <div class="feature-post-meta">
+                        <a href="">
+                          <i class="fa fa-clock-o"></i> 3 years ago</a
+                        >
+                      </div>
+                      <div class="feature-post-meta-bottom">
+                        Euro 0-1000 / Monthly
+                      </div>
+                      <!-- <div class="features-star"><i class="fa fa-star"></i></div> -->
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-4 col-sm-6 col-xs-12">
+                  <div class="featured-image-box">
+                    <div class="img-box">
+                      <img
+                        src="/assets/images/05-1.png"
+                        class="img-responsive center-block"
+                        alt="logo"
+                      />
+                    </div>
+
+                    <div class="content-area">
+                      <div class="">
+                        <h4><a href="#">Data Entry Clerk…</a></h4>
+                        <p>
+                          Localhead Inc. Ltd. ,
+                          <a href="#">USA</a>
+                        </p>
+                      </div>
+                      <div class="feature-post-meta">
+                        <a href="">
+                          <i class="fa fa-clock-o"></i> 3 years ago</a
+                        >
+                      </div>
+                      <div class="feature-post-meta-bottom">
+                        Euro 0-1000 / Monthly
+                      </div>
+                      <!-- <div class="features-star"><i class="fa fa-star"></i></div> -->
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-4 col-sm-6 col-xs-12">
+                  <div class="featured-image-box">
+                    <div class="img-box">
+                      <img
+                        src="/assets/images/05-1.png"
+                        class="img-responsive center-block"
+                        alt="logo"
+                      />
+                    </div>
+
+                    <div class="content-area">
+                      <div class="">
+                        <h4><a href="#">Data Entry Clerk…</a></h4>
+                        <p>
+                          Localhead Inc. Ltd. ,
+                          <a href="#">USA</a>
+                        </p>
+                      </div>
+                      <div class="feature-post-meta">
+                        <a href="">
+                          <i class="fa fa-clock-o"></i> 3 years ago</a
+                        >
+                      </div>
+                      <div class="feature-post-meta-bottom">
+                        Euro 0-1000 / Monthly
+                      </div>
+                      <!-- <div class="features-star"><i class="fa fa-star"></i></div> -->
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="n-extra-btn-section">
+              <a href="#" class="n-btn-flat btn-mid"> View All </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="section how-it-works style-2">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <div class="heading-title black">
+          <h2>How It Works</h2>
+          <p>Lorem ipsum dolor sit amet elit, sed do eiusmod tempor.</p>
+        </div>
+      </div>
+      <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="row">
+          <div
+            class="h-i-w-box"
+            style="background: url(/assets/images/how-it-works-1.png) no-repeat; -webkit-background-size: contain; -moz-background-size: contain; -o-background-size: contain; background-size: contain; background-position: center center; background-attachment:scroll;"
+          >
+            <div class="work-points">
+              <div class="col-md-3 col-sm-6 col-xs-12">
+                <div class="h-i-w-content-box">
+                  <img
+                    src="https://jobs.nokriwp.com/wp-content/uploads/2018/08/h-i-w-1.png"
+                    class="img-responsive main-img"
+                    alt="image"
+                  />
+                  <h4>Register Account</h4>
+                  <p>Lorem ipsum dolor sit amet, consectetuer.</p>
+                </div>
+              </div>
+              <div class="col-md-3 col-sm-6 col-xs-12">
+                <div class="h-i-w-content-box">
+                  <img
+                    src="https://jobs.nokriwp.com/wp-content/uploads/2018/08/h-i-w-2.png"
+                    class="img-responsive main-img"
+                    alt="image"
+                  />
+                  <h4>Update Profile</h4>
+                  <p>Lorem ipsum dolor sit amet, adipiscing.</p>
+                </div>
+              </div>
+              <div class="col-md-3 col-sm-6 col-xs-12">
+                <div class="h-i-w-content-box">
+                  <img
+                    src="https://jobs.nokriwp.com/wp-content/uploads/2018/08/h-i-w-3.png"
+                    class="img-responsive main-img"
+                    alt="image"
+                  />
+                  <h4>Search dream Job</h4>
+                  <p>Lorem ipsum dolor sit amet, consectetuer.</p>
+                </div>
+              </div>
+              <div class="col-md-3 col-sm-6 col-xs-12">
+                <div class="h-i-w-content-box">
+                  <img
+                    src="https://jobs.nokriwp.com/wp-content/uploads/2018/08/h-i-w-4.png"
+                    class="img-responsive main-img"
+                    alt="image"
+                  />
+                  <h4>Apply For Job</h4>
+                  <p>Lorem ipsum dolor sit amet, adipiscing.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <div class="row">
+          <div class="n-call-to-box mt40">
+            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+              <div class="n-call-to-action-text">
+                <h3>Looking for to Resources?</h3>
+                <p>
+                  Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
+                  Aenean commodo ligula eget dolor. Aenean massa. Cum sociis
+                  natoque penatibus et magnis dis parturient montes, nascetur
+                  ridiculus mus.
+                </p>
+                <p>
+                  onec quam felis, ultricies nec, pellentesque eu, pretium quis,
+                  sem. Nulla consequat massa quis enim. Lorem ipsum dolor sit
+                  amet, consectetuer adipiscing elit. Aenean commodo.
+                </p>
+              </div>
+              <div class="n-extra-btn-section">
+                <a [routerLink]="['/job-search']" class="n-btn-flat btn-mid">
+                  Apply Job Now
+                </a>
+              </div>
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+              <img
+                src="/assets/images/callto.png"
+                class="img-responsive"
+                alt="image"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div
+  class=" section client-section"
+  style="background:  url(/assets/images/199-min.jpg) no-repeat fixed top center / cover; -webkit-background-size: cover; -moz-background-size: cover; -o-background-size: cover; background-size: cover;"
+>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-4 col-sm-12 col-xs-12">
+        <div class="heading-2">
+          <h3>About JobPortal</h3>
+          <h2>Top Hiring Companies</h2>
+        </div>
+      </div>
+      <div class="col-md-8 col-sm-12 col-xs-12">
+        <div class="top-hiring-company-slider">
+          <div class="item">
+            <a href="#">
+              <img
+                src="/assets/images/medical-logo-1.jpg"
+                class="img-responsive"
+                alt="image"
+              />
+            </a>
+          </div>
+          <div class="item">
+            <a href="#">
+              <img
+                src="/assets/images/06-150x150.png"
+                class="img-responsive"
+                alt="image"
+              />
+            </a>
+          </div>
+          <div class="item">
+            <a href="#">
+              <img
+                src="/assets/images/05-1.png"
+                class="img-responsive"
+                alt="image"
+              />
+            </a>
+          </div>
+          <div class="item">
+            <a href="#">
+              <img
+                src="https://jobs.nokriwp.com/wp-content/uploads/2018/09/jornadas-nutricao-2017-ULSNE-1.png"
+                class="img-responsive"
+                alt="image"
+              />
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

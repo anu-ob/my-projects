@@ -1,0 +1,86 @@
+<header>
+  <div class="container-header">
+    <div class="row">
+      <div class="col-md-12 col-sm-12 col-lg-3 col-xl-3 mob-layout">
+        <div class="logo">
+          <!-- <a href="/" title="logo"> Quazi </a> -->
+          <a href="#"
+            ><img
+              src="/assets/images/qlogo.png"
+              class="img-responsive"
+              alt="logo"
+          /></a>
+        </div>
+        <div class="mob-menu">
+          <nav class="navbar sticky-top navbar-expand-lg">
+            <div class="container">
+              <button
+                class="navbar-toggler"
+                type="button"
+                data-toggle="collapse"
+                data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent"
+                aria-expanded="false"
+                aria-label="Toggle navigation"
+              >
+                <i class="fa fa-bars"></i>
+              </button>
+              <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto w-100 justify-content-end">
+                  <li class="nav-item active">
+                    <a class="nav-link" [routerLink]="['/']"
+                      >Home <span class="sr-only">(current)</span></a
+                    >
+                  </li>
+                  <!-- <li class="nav-item">
+                    <a class="nav-link" href="#">Process</a>
+                  </li>
+
+                  <li class="nav-item">
+                  <a class="nav-link" href="#">Blog</a>
+                  </li> -->
+                  <li><a href="#"> Job Listing </a></li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="#">Contact Us</a>
+                  </li>
+
+                  <li class="nav-item">
+                    <a class="nav-link" href="#"
+                      ><i class="fa fa-phone"></i> 1800-102-5558</a
+                    >
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </nav>
+        </div>
+      </div>
+      <div class="col-md-12 col-sm-12 col-lg-9 col-xl-9">
+        <div class="main-menu">
+          <ul class="nav">
+            <li><a [routerLink]="['/']"> Home </a></li>
+            <!-- <li><a href="#"> Process </a></li>
+            <li><a href="#"> Blog </a></li> -->
+            <li><a href="#"> Contact Us </a></li>
+            <li><a href="#"> Job Listing </a></li>
+          </ul>
+
+          <ul class="right-nav">
+            <li>
+              <a href="#"> <i class="fa fa-phone"></i> 1800-102-5558</a>
+            </li>
+            <li>
+              <a href="login.html"> <i class="fa fa-sign-in"></i> Login</a>
+            </li>
+            <li>
+              <a href="register.html">
+                <i class="fa fa-user-plus"></i> Register</a
+              >
+            </li>
+            <!-- <li> <a href="#" class="n-btn-flat btn-mid"> <i class="fa fa-sign-in"></i> Job Seeker </a> </li> -->
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>

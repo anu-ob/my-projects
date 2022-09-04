@@ -1,0 +1,394 @@
+<div class="sections2 section jobsearch">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <div class="row">
+          <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+            <aside class="new-sidebar">
+              <form action="" [formGroup]="jobSearchForm">
+                <div class="heading">
+                  <h4>Search Filters</h4>
+                  <a (click)="clearAll()">Clear All</a>
+                </div>
+                <div
+                  class="panel-group"
+                  id="accordion"
+                  role="tablist"
+                  aria-multiselectable="true"
+                >
+                  <div class="panel panel-default">
+                    <div class="panel-heading tab-collapsed " role="tab">
+                      <a
+                        role="button"
+                        data-toggle="collapse"
+                        aria-expanded="true"
+                        class=""
+                      >
+                        Job Keyword
+                      </a>
+                    </div>
+                    <div
+                      id="job_keyword"
+                      class="panel-collapse collapse in"
+                      role="tabpanel"
+                      aria-expanded="true"
+                    
+                    >
+                      <div class="panel-body">
+                        <div class="form-group">
+                          <input
+                            type="text"
+                            id="autocomplete-dynamic"
+                            class="form-control"
+                            name="job-title"
+                            formControlName="keyword"
+                            [placeholder]="jobKeywords"
+                          />
+                        </div>
+                    
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div
+                  class="panel-group"
+                  id="accordion"
+                  role="tablist"
+                  aria-multiselectable="true"
+                >
+                  <div class="panel panel-default">
+                    <div class="panel-heading tab-collapsed " role="tab">
+                      <a
+                        role="button"
+                        data-toggle="collapse"
+                        aria-expanded="true"
+                        class=""
+                      >
+                        Job Location
+                      </a>
+                    </div>
+                    <div
+                      id="job_loc"
+                      class="panel-collapse collapse in"
+                      role="tabpanel"
+                      aria-expanded="true"
+                    >
+                      <div class="panel-body">
+                        <div class="form-group">
+                          <!-- <input
+                            type="text"
+                            id="autocomplete-dynamic"
+                            autocomplete="off"
+                            class="form-control"
+                            name="job-loc"
+                            formControlName="location"
+                            placeholder="city, province, or region"
+                          /> -->
+
+                          <ng-autocomplete
+                            [data]="data"
+                            [searchKeyword]="keyword"
+                            (inputChanged)="getServerResponse($event)"
+                            [itemTemplate]="itemTemplate"
+                            (inputCleared)="searchCleared()"
+                            [debounceTime]="200"
+                            [isLoading]="isLoadingResult"
+                            formControlName="location"
+                            [placeholder]="keyword"
+                          >
+                          </ng-autocomplete>
+
+                          <ng-template #itemTemplate let-item>
+                            <a href="javascript:void(0)">
+                              <div class="row">
+                                <div class="col-10">
+                                  <span [innerHTML]="item"></span>
+                                </div>
+                              </div>
+                            </a>
+                          </ng-template>
+                        </div>
+                        <div class="form-group form-action"></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div
+                  class="panel-group"
+                  id="accordion"
+                  role="tablist"
+                  aria-multiselectable="true"
+                >
+                  <div class="panel panel-default">
+                    <div class="panel-heading tab-collapsed " role="tab">
+                      <a
+                        role="button"
+                        data-toggle="collapse"
+                        aria-expanded="true"
+                        class=""
+                      >
+                        Job Type
+                      </a>
+                    </div>
+                    <div
+                      id="job_type"
+                      class="panel-collapse collapse in"
+                      role="tabpanel"
+                      aria-expanded="true"
+                    >
+                      <div class="panel-body">
+                        <div class="form-group">
+                          <select
+                            class="form-select"
+                            aria-label="Default select example"
+                            (change)="selectJobType($event)"
+                            formControlName="jobType"
+                          >
+                            <option value="" selected disabled>Select Job Type</option>
+                            <!-- <label>Education</label> -->
+
+                            <option
+                              *ngFor="let job of jobTypeList"
+                              [value]="job._id"
+                              >{{job.name}}</option
+                            >
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <button
+                  type="submit"
+                  (click)="searchFilter()"
+                  class="btn n-btn-flat btn-mid"
+                >
+                  Search
+                </button>
+              </form>
+            </aside>
+          </div>
+
+          <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
+            <div class="n-search-main">
+              <div class="heading-area">
+                <div class="row date-area">
+                  <div class="col-md-12 col-sm-12 col-xs-12">
+                    <h4>Available Jobs ({{totalJobs}})</h4>
+                  </div>
+                </div>
+              </div>
+              <div
+                class="mansi tabcontent"
+                id="default"
+                style="position: relative; width:100%;"
+              >
+                <div class="n-search-listing n-featured-jobs">
+                  <div class="n-featured-job-boxes">
+                    <div
+                      class="n-job-single "
+                      *ngFor="let jobs of recommendedJobs | paginate : {
+                      itemsPerPage: model.recordsPerPage,
+                      currentPage: model.pageNumber+1,
+                      totalItems: totalJobs
+                    }"
+                    >
+                      <div class="n-job-detail">
+                        <ul class="list-inline">
+                          <li class="n-job-title-box">
+                            <h4>
+                              <a
+                                style="cursor: pointer;"
+                                (click)="openListing('job-detail', $event, '#f3642c','#fff',jobs)"
+                                rel="nofollow"
+                              >
+                                {{jobs.job_name}}</a
+                              >
+                            </h4>
+
+                            <div>
+                              <p>
+                                <i class="fa fa-tag"></i>
+                                <a> {{jobs.company_name}}</a>
+                              </p>
+                            </div>
+                            <div>
+                              <p>
+                                <i class="fa fa-map-marker"></i>
+                                <a> {{jobs.job_location}}</a>
+                              </p>
+                            </div>
+                            <div *ngIf="jobs.listing_type">
+                              <p>
+                                <i class="fa fa-list"></i>
+                                <a href="javascript:void">
+                                  {{jobs.listing_type |titlecase}}</a
+                                >
+                              </p>
+                            </div>
+                          </li>
+                          <li class="n-job-short">
+                            <span>
+                              <strong>Posted:</strong
+                              >{{getTimeDiff(jobs.creation_date)}}</span
+                            >
+                          </li>
+                          <li class="n-job-btns">
+                            <a
+                              (click)="applyNow(jobs._id)"
+                              class="btn n-btn-rounded"
+                              rel="nofollow"
+                              [ngClass]="{'isDisabled':jobs.is_already_applied}"
+                            >
+                              Apply Now
+                            </a>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                    <div class="clearfix"></div>
+
+                    <div
+                      class="col-lg-4 col-md-4 col-sm-12 col-xs-12 nopadding text-left "
+                    >
+                      <h4>
+                        Records Per Page:
+                        <select (change)="handlePageSizeChange($event)">
+                          <option
+                            *ngFor="let size of pageSizes"
+                            [ngValue]="size"
+                            [selected]="size == model.recordsPerPage"
+                          >
+                            {{ size }}
+                          </option>
+                        </select>
+                      </h4>
+                    </div>
+                    <div
+                      class="col-lg-8 col-md-8 col-sm-12 col-xs-12 nopadding"
+                    >
+                      <pagination-controls
+                        previousLabel="Prev"
+                        nextLabel="Next"
+                        [responsive]="true"
+                        (pageChange)="handlePageChange($event)"
+                      ></pagination-controls>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div
+                class="mansi tabcontent"
+                id="job-detail"
+                style="position: relative; width:100%;display: none;"
+              >
+                <div class="n-search-listing n-featured-jobs" *ngIf="singleJob">
+                  <div class="n-featured-job-boxes">
+                    <section class="single-job single-job-transparent">
+                      <div class="container">
+                        <div class="row">
+                          <div
+                            class="col-lg-9 col-md-8 col-sm-12 col-xs-12 t-left"
+                          >
+                            <ul class="featured-badge-list"></ul>
+                            <div class="single-title">
+                              <h1>
+                                {{singleJob && singleJob.job_name}}
+                              </h1>
+                              <h1>
+                                Posted By: {{singleJob &&
+                                (!singleJob.posted_by_user?singleJob.posted_by:singleJob.posted_by_user)}}
+                              </h1>
+                              <ul>
+                                <li>
+                                  <i class="fa fa-tag"></i> {{singleJob &&
+                                  singleJob.company_name}}
+                                </li>
+                                <!-- <li
+                                  *ngIf="singleJob
+                                && singleJob.jobDetails.job_type"
+                                >
+                                  <i class="fa fa-hand-o-right"></i> {{singleJob
+                                  && singleJob.jobDetails.job_type}}
+                                </li> -->
+                                <li>
+                                  <i class="fa fa-clock-o"></i> {{singleJob &&
+                                  singleJob.creation_date|date:'MM-dd-yyyy'}}
+                                </li>
+                                <li>
+                                  <i class="fa fa-map-marker"></i
+                                  ><a href="">
+                                    {{singleJob && singleJob.job_location}}</a
+                                  >
+                                </li>
+                              </ul>
+                            </div>
+                          </div>
+                          <div class="col-lg-3 col-md-4 col-sm-12 col-xs-12">
+                            <aside class="single-sidebar">
+                              <div class="apply-buttons">
+                                <a
+                                  href="javascript:void(0)"
+                                  class="btn n-btn-flat btn-mid btn-clear apply_job"
+                                  id="applying_job"
+                                  style="padding-left:10px;cursor: pointer;"
+                                  (click)="applyNow(singleJob._id)"
+                                >
+                                  <i class="fa fa-map-marker"></i>
+                                  Apply Now
+                                </a>
+                              </div>
+                            </aside>
+                          </div>
+                        </div>
+                      </div>
+                    </section>
+
+                    <section class="single-job light-grey detail-transparent">
+                      <div class="container">
+                        <div class="row">
+                          <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <div class="single-detail">
+                              <h4>Job Description</h4>
+                              <div>
+                                {{singleJob && singleJob.job_description}}
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <div class="single-detail">
+                              <h4>Skills Required</h4>
+                              <div *ngFor="let skill of singleJob.skills">
+                                {{skill}}
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-md-12 col-sm-12 col-xs-12 back-btn">
+                          <a
+                            (click)="openListing('default', $event, '#f3642c','#fff')"
+                            class="n-btn-flat btn-mid"
+                            style="float: right; cursor: pointer;"
+                          >
+                            Back
+                          </a>
+                        </div>
+                      </div>
+                    </section>
+
+                    <div class="clearfix"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

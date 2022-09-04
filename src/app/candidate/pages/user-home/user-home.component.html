@@ -1,0 +1,2089 @@
+<div class="how-section1 section">
+  <div class="row">
+    <!-- <div class="col-md-6 how-img sec1-left-img">
+      </div> -->
+    <div class="col-md-12 sec1-right-img"></div>
+  </div>
+  <div class="container-fluid">
+    <div class="row">
+      <!-- <div class="col-md-6 col-sm-6 col-xs-12 no-padding">
+              <div class="section-container-left">
+                 <h2>LOOKING FOR TOP RESOUCE?</h2>
+                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor.At vero eos et accusamus et iusto.</p>
+                  <a href="#" class="n-btn-flat btn-mid"> Post Job </a>
+              </div>
+          </div> -->
+      <div class="col-md-12 col-sm-12 col-xs-12 no-padding">
+        <div class="section-container-right no-padd">
+          <h2>User Details</h2>
+          <p>
+            {{ userDetails.description }}
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="section featured-jobs light-blue">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="row 2-side">
+          <div class="col-md-3 col-sm-12 col-xs-12 left-side">
+            <!-- <div class="heading-title black">
+              <h2>About Me</h2>
+              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor.At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium</p>
+            </div> -->
+            <div class="user-data">
+              <img src="{{ profile_image_path }}" />
+              <div class="info">
+                <h3>
+                  {{ userDetails.first_name }} {{ userDetails.last_name }}
+                </h3>
+                <!-- <p>{{ userDetails.profile_summary }}</p> -->
+                <small>{{ userDetails.education }}</small>
+              </div>
+            </div>
+            <div class="one-row-btn user-job">
+              <button
+                class="tablink"
+                id="default-user-tab"
+                (click)="openListing('Internship', $event, '#f3642c', '#fff')"
+              >
+                Personal Details
+              </button>
+              <button
+                class="tablink"
+                (click)="openListing('Workshop', $event, '#f3642c', '#fff')"
+              >
+                Recommended Jobs
+              </button>
+
+              <button
+                class="tablink"
+                id="jobList"
+                (click)="openListing('Job', $event, '#f3642c', '#fff')"
+              >
+                Applied Jobs
+                <span class="number">{{ userDetails.applied_jobs_count }}</span>
+              </button>
+
+              <button
+                class="tablink"
+                (click)="openListing('Messages', $event, '#f3642c', '#fff')"
+              >
+                Messages<span class="number">5</span>
+              </button>
+              <button
+                class="tablink"
+                (click)="openListing('Internships', $event, '#f3642c', '#fff')"
+              >
+                Connections<span class="number">1</span>
+              </button>
+              <!-- <button class="tablink" (click)="openListing('digiresume', this, '#f3642c','#fff')">Digital Resume</button> -->
+
+              <button class="tablink" [routerLink]="['/payment']">
+                Pricing
+              </button>
+              <button
+                class="tablink"
+                (click)="openListing('digiresume', this, '#f3642c', '#fff')"
+              >
+                Digital Resume
+              </button>
+
+              
+            
+            </div>
+          </div>
+          <div class="col-md-9 col-sm-12 col-xs-12 right-side">
+            <div class="row">
+              <div
+                class="mansi tabcontent"
+                id="Job"
+                style="position: relative; width: 100%; display: none"
+              >
+                <div class="n-search-listing n-featured-jobs">
+                  <div class="n-featured-job-boxes">
+                    <div
+                      class="n-job-single"
+                      *ngFor="
+                        let job of appliedJobs
+                          | paginate
+                            : {
+                                itemsPerPage: 35,
+                                currentPage: page,
+                                totalItems: this.appliedJobsCount
+                              }
+                      "
+                    >
+                      <div class="n-job-detail">
+                        <ul class="list-inline">
+                          <li class="n-job-title-box">
+                            <h4>
+                              <a href="javascript:void" rel="nofollow">
+                                {{ job.jobDetails.job_name }}</a
+                              >
+                            </h4>
+                            <p>
+                              <span
+                                ><i class="fa fa-tag"></i>
+                                <a href="javascript:void">
+                                  {{ job.jobDetails.company_name }}</a
+                                ></span
+                              ><span
+                                ><i class="fa fa-map-marker"></i>
+                                <a href="javascript:void">
+                                  {{ job.jobDetails.job_location }}</a
+                                ></span
+                              >
+                            </p>
+                          </li>
+                          <li class="n-job-short">
+                            <span>
+                              <strong>Posted:</strong>
+                              {{
+                                getTimeDiff(job.jobDetails.creation_date)
+                              }}</span
+                            >
+                          </li>
+                          <li class="n-job-btns">
+                            <a
+                              href="javascript:void"
+                              class="btn n-btn-rounded"
+                              rel="nofollow"
+                              (click)="
+                                openListing(
+                                  'job-detail',
+                                  $event,
+                                  '#f3642c',
+                                  '#fff',
+                                  job
+                                )
+                              "
+                              >View Details
+                            </a>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+
+                    <div class="clearfix"></div>
+
+                    <div
+                      *ngIf="appliedJobsCount > 0"
+                      class="col-lg-4 col-md-4 col-sm-12 col-xs-12 nopadding text-left"
+                    >
+                      <h4>
+                        Records Per Page:
+                        <select
+                          (change)="handlePageSizeChangeAppliedJob($event)"
+                        >
+                          <option
+                            *ngFor="let size of pageSizes"
+                            [ngValue]="size"
+                            [selected]="size == model.recordsPerPage"
+                          >
+                            {{ size }}
+                          </option>
+                        </select>
+                      </h4>
+                    </div>
+                    <div
+                      *ngIf="appliedJobsCount > 0"
+                      class="col-lg-8 col-md-8 col-sm-12 col-xs-12 nopadding job-pagination"
+                    >
+                      <pagination-controls
+                        previousLabel="Prev"
+                        nextLabel="Next"
+                        [responsive]="true"
+                        (pageChange)="handlePageChangeAppliedJob($event)"
+                      ></pagination-controls>
+                    </div>
+                    <!-- <div
+                      class="col-lg-12 col-md-12 col-sm-12 col-xs-12 nopadding"
+                    >
+                      <nav aria-label="Page navigation">
+                        <ul class="pagination">
+                          <li>
+                            <span
+                              aria-current="page"
+                              class="page-numbers current"
+                              >1</span
+                            >
+                          </li>
+                          <li><a class="page-numbers" href="">2</a></li>
+                          <li><a class="page-numbers" href="">3</a></li>
+                          <li><span class="page-numbers dots">…</span></li>
+                          <li><a class="page-numbers" href="">5</a></li>
+                          <li>
+                            <a class="next page-numbers" href=""
+                              >Next &gt;&gt;</a
+                            >
+                          </li>
+                        </ul>
+                      </nav>
+                    </div> -->
+                  </div>
+                </div>
+              </div>
+
+              <div
+                class="mansi tabcontent"
+                id="Workshop"
+                style="position: relative; width: 100%; display: none"
+              >
+                <div class="pull-right col-sm-12 top-filter">
+                  <span class="pull-left col-sm-4">
+                    <span class="pull-left mr-2 mt-2"> Job Type </span>
+                    <span class="pull-right">
+                      <select
+                        class="js-example-basic-single form-control select2-hidden-accessible"
+                        data-allow-clear="true"
+                        data-placeholder="Select Option"
+                        style="width: 100%"
+                        name="jt"
+                        id="jt"
+                        tabindex="-1"
+                        aria-hidden="true"
+                        (change)="selectJobType($event)"
+                      >
+                        <option value="null" selected>Select Job Type</option>
+                        <option
+                          *ngFor="let job of jobTypeList"
+                          [value]="job._id"
+                        >
+                          {{ job.name }}
+                        </option>
+                      </select>
+                    </span>
+                  </span>
+                  <span class="col-sm-4">
+                    <div class="input-group">
+                      <input
+                        type="text"
+                        class="form-control job-search-text"
+                        placeholder="skills,employment type, job..."
+                        [(ngModel)]="keyword"
+                        (keyup.enter)="searchJobs()"
+                      />
+                      <span class="input-group-addon" (click)="searchJobs()">
+                        <i class="fa fa-search"></i>
+                      </span>
+                    </div>
+                  </span>
+                  <span
+                    class="total-rec-jobs pull-right col-sm-4"
+                    *ngIf="recomendedJobsCount > 0"
+                    >Total Recommended Jobs: {{ recomendedJobsCount }}</span
+                  >
+                </div>
+                <span
+                  *ngIf="recomendedJobsCount == 0"
+                  style="color: rgb(243, 100, 44)"
+                  >No Recommended Jobs for you yet!</span
+                >
+                <div class="n-search-listing n-featured-jobs">
+                  <div class="n-featured-job-boxes">
+                    <div
+                      class="n-job-single"
+                      *ngFor="
+                        let job of recommendedJobsForUser
+                          | paginate
+                            : {
+                                itemsPerPage: model.recordsPerPage,
+                                currentPage: model.pageNumber + 1,
+                                totalItems: totalJobs
+                              }
+                      "
+                    >
+                      <div class="n-job-detail">
+                        <ul class="list-inline">
+                          <li class="n-job-title-box">
+                            <h4>
+                              <a
+                                href="javascript:void"
+                                rel="nofollow"
+                                title="click to view job details"
+                                id="btnrecopenList"
+                                (click)="
+                                  openListing(
+                                    'job-details',
+                                    $event,
+                                    '#f3642c',
+                                    '#fff',
+                                    job
+                                  )
+                                "
+                              >
+                                {{ job.job_name }}</a
+                              >
+                            </h4>
+                            <p>
+                              <span
+                                ><i class="fa fa-tag"></i>
+                                <a href="javascript:void">
+                                  {{ job.company_name }}</a
+                                ></span
+                              ><span
+                                ><i class="fa fa-map-marker"></i>
+                                <a href="javascript:void">
+                                  {{ job.job_location }}</a
+                                ></span
+                              >
+                              <span class="col-sm-12 ps-0">
+                                <i class="fa fa-list"></i>
+                                {{ job.listing_type | titlecase }}
+                              </span>
+                            </p>
+                          </li>
+                          <li class="n-job-short">
+                            <span>
+                              <strong> Posted:</strong
+                              >{{ getTimeDiff(job.creation_date) }}</span
+                            >
+                          </li>
+                          <li class="n-job-btns">
+                            <a
+                              href="javascript:void"
+                              class="btn n-btn-rounded"
+                              rel="nofollow"
+                              (click)="applyJob(job._id)"
+                              [ngClass]="{ isDisabled: job.is_already_applied }"
+                            >
+                              {{
+                                job.is_already_applied
+                                  ? "Already Applied"
+                                  : "Apply
+                              Now"
+                              }}
+                            </a>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+
+                    <!-- <div class="clearfix"></div> -->
+                    <div
+                      *ngIf="totalJobs > 0"
+                      class="col-lg-4 col-md-4 col-sm-12 col-xs-12 nopadding text-left"
+                    >
+                      <h4>
+                        Records Per Page:
+                        <select (change)="handlePageSizeChange($event)">
+                          <option
+                            *ngFor="let size of pageSizes"
+                            [ngValue]="size"
+                            [selected]="size == model.recordsPerPage"
+                          >
+                            {{ size }}
+                          </option>
+                        </select>
+                      </h4>
+                    </div>
+                    <div
+                      *ngIf="totalJobs > 0"
+                      class="col-lg-8 col-md-8 col-sm-12 col-xs-12 nopadding job-pagination"
+                    >
+                      <pagination-controls
+                        previousLabel="Prev"
+                        nextLabel="Next"
+                        [responsive]="true"
+                        (pageChange)="handlePageChange($event)"
+                      ></pagination-controls>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div
+                class="mansi tabcontent"
+                id="job-detail"
+                style="position: relative; width: 100%"
+              >
+                <div
+                  class="n-search-listing n-featured-jobs"
+                  *ngIf="singleAppliedJobs && singleAppliedJobs.jobDetails"
+                >
+                  <div class="n-featured-job-boxes">
+                    <section class="single-job single-job-transparent">
+                      <div class="container">
+                        <div class="row">
+                          <div
+                            class="col-lg-9 col-md-8 col-sm-12 col-xs-12 t-left"
+                          >
+                            <ul class="featured-badge-list"></ul>
+                            <div class="single-title">
+                              <h1>
+                                {{
+                                  singleAppliedJobs &&
+                                    singleAppliedJobs.jobDetails.job_name
+                                }}
+                              </h1>
+                              <h1>
+                                Posted By:
+                                {{
+                                  singleAppliedJobs &&
+                                    singleAppliedJobs.jobDetails.company_name
+                                }}
+                              </h1>
+                              <ul>
+                                <li>
+                                  <i class="fa fa-tag"></i>
+                                  {{
+                                    singleAppliedJobs &&
+                                      singleAppliedJobs.jobDetails.company_name
+                                  }}
+                                </li>
+                                <!-- <li
+                                  *ngIf="singleJob
+                                && singleJob.jobDetails.job_type"
+                                >
+                                  <i class="fa fa-hand-o-right"></i> {{singleJob
+                                  && singleJob.jobDetails.job_type}}
+                                </li> -->
+                                <li>
+                                  <i class="fa fa-clock-o"></i>
+                                  {{
+                                    singleAppliedJobs &&
+                                      singleAppliedJobs.jobDetails.creation_date
+                                      | date: "MM-dd-yyyy"
+                                  }}
+                                </li>
+                                <li>
+                                  <i class="fa fa-map-marker"></i
+                                  ><a href="">
+                                    {{
+                                      singleAppliedJobs &&
+                                        singleAppliedJobs.jobDetails
+                                          .job_location
+                                    }}</a
+                                  >
+                                </li>
+                              </ul>
+                            </div>
+                          </div>
+                          <div class="col-lg-3 col-md-4 col-sm-12 col-xs-12">
+                            <aside class="single-sidebar">
+                              <!-- <div class="apply-buttons">
+                                <a
+                                  href="javascript:void(0)"
+                                  class="btn n-btn-flat btn-mid btn-clear apply_job"
+                                  id="applying_job"
+                                  (click)="applyJob(singleJob.job._id,singleJob.is_already_applied)"
+                                  [ngClass]="{'isDisabled':singleJob && singleJob.is_already_applied==undefined}"
+                                >
+                                  {{singleJob &&
+                                  singleJob.is_already_applied==undefined?'Already
+                                  Applied':'Apply Now'}}</a
+                                >
+                              </div> -->
+                              <div class="apply-buttons">
+                                <a
+                                  href="javascript:void(0)"
+                                  class="btn n-btn-flat btn-mid btn-clear apply_job"
+                                  id="applying_job"
+                                  style="padding-left: 10px"
+                                >
+                                  <i class="fa fa-map-marker"></i>
+                                  Applied:
+                                  {{
+                                    singleAppliedJobs &&
+                                      singleAppliedJobs.creation_date
+                                      | date: "MM-dd-YYYY"
+                                  }}
+                                </a>
+                              </div>
+                            </aside>
+                          </div>
+                        </div>
+                      </div>
+                    </section>
+
+                    <section class="single-job light-grey detail-transparent">
+                      <div class="container">
+                        <div class="row">
+                          <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <div class="single-detail">
+                              <h4>Job Description</h4>
+                              <div>
+                                {{
+                                  singleAppliedJobs &&
+                                    singleAppliedJobs.jobDetails.job_description
+                                }}
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <div class="single-detail">
+                              <h4>Skills Required</h4>
+                              <div
+                                *ngFor="
+                                  let skill of singleAppliedJobs.jobDetails
+                                    .skills
+                                "
+                              >
+                                {{ skill.display }}
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <ng-stepper #cdkStepper [linear]="false">
+                              <cdk-step [optional]="true">
+                                <ng-template cdkStepLabel>
+                                  <div class="step-bullet">
+                                    <i
+                                      class="fa fa-check-circle"
+                                      aria-hidden="true"
+                                    ></i>
+                                  </div>
+                                  <div class="step-title">Submitted</div>
+                                </ng-template>
+                                <!-- <app-step-one #stepOne></app-step-one> -->
+                              </cdk-step>
+
+                              <cdk-step [optional]="true">
+                                <ng-template cdkStepLabel>
+                                  <div class="step-bullet">
+                                    <i
+                                      class="fa fa-check-circle"
+                                      aria-hidden="true"
+                                    ></i>
+                                  </div>
+                                  <div class="step-title">Application seen</div>
+                                </ng-template>
+                                <!-- <app-step-two #stepTwo></app-step-two> -->
+                              </cdk-step>
+                              <cdk-step [optional]="true">
+                                <ng-template cdkStepLabel>
+                                  <div class="step-bullet">
+                                    <i
+                                      class="fa fa-check-circle"
+                                      aria-hidden="true"
+                                    ></i>
+                                  </div>
+                                  <div class="step-title">In progress</div>
+                                </ng-template>
+                                <!-- <app-step-three #stepThree></app-step-three> -->
+                              </cdk-step>
+                              <cdk-step [optional]="true">
+                                <ng-template cdkStepLabel>
+                                  <div class="step-bullet">
+                                    <i
+                                      class="fa fa-check-circle"
+                                      aria-hidden="true"
+                                    ></i>
+                                  </div>
+                                  <div class="step-title">Selected</div>
+                                </ng-template>
+                                <!-- <app-step-four #stepFour></app-step-four> -->
+                              </cdk-step>
+                            </ng-stepper>
+                          </div>
+                        </div>
+                        <div class="col-md-12 col-sm-12 col-xs-12 back-btn">
+                          <a
+                            (click)="
+                              openListing('Job', $event, '#f3642c', '#fff')
+                            "
+                            class="n-btn-flat btn-mid"
+                            style="float: right"
+                          >
+                            Back
+                          </a>
+                        </div>
+                      </div>
+                    </section>
+                    <div class="clearfix"></div>
+                  </div>
+                </div>
+              </div>
+
+              <div
+                class="mansi tabcontent"
+                id="job-details"
+                style="position: relative; width: 100%"
+              >
+                <div class="n-search-listing n-featured-jobs" *ngIf="singleJob">
+                  <div class="n-featured-job-boxes">
+                    <section class="single-job single-job-transparent">
+                      <div class="container">
+                        <div class="row">
+                          <div
+                            class="col-lg-9 col-md-8 col-sm-12 col-xs-12 t-left"
+                          >
+                            <ul class="featured-badge-list"></ul>
+                            <div class="single-title">
+                              <h1>
+                                {{ singleJob && singleJob.job_name }}
+                              </h1>
+                              <h1>
+                                Posted By:
+                                {{ singleJob && singleJob.posted_by_user }}
+                              </h1>
+                              <ul>
+                                <li>
+                                  <i class="fa fa-tag"></i>
+                                  {{ singleJob && singleJob.company_name }}
+                                </li>
+                                <li *ngIf="singleJob && singleJob.job_type">
+                                  <i class="fa fa-hand-o-right"></i>
+                                  {{ singleJob && singleJob.job_type }}
+                                </li>
+                                <li>
+                                  <i class="fa fa-clock-o"></i>
+                                  {{
+                                    singleJob && singleJob.creation_date
+                                      | date: "MM-dd-yyyy"
+                                  }}
+                                </li>
+                                <li>
+                                  <i class="fa fa-map-marker"></i
+                                  ><a href="">
+                                    {{ singleJob && singleJob.job_location }}</a
+                                  >
+                                </li>
+                              </ul>
+                            </div>
+                          </div>
+                          <div class="col-lg-3 col-md-4 col-sm-12 col-xs-12">
+                            <aside class="single-sidebar">
+                              <div
+                                class="apply-buttons"
+                                *ngIf="!singleJob.is_already_applied"
+                              >
+                                <a
+                                  href="javascript:void(0)"
+                                  class="btn n-btn-flat btn-mid btn-clear apply_job"
+                                  id="applying_job"
+                                  (click)="
+                                    applyJob(
+                                      singleJob._id,
+                                      singleJob.is_already_applied
+                                    )
+                                  "
+                                  [ngClass]="{
+                                    isDisabled: singleJob.is_already_applied
+                                  }"
+                                >
+                                  {{
+                                    singleJob.is_already_applied
+                                      ? "Already Applied"
+                                      : "Apply Now"
+                                  }}</a
+                                >
+                              </div>
+
+                              <div
+                                class="apply-buttons"
+                                *ngIf="singleJob.is_already_applied"
+                              >
+                                <a
+                                  href="javascript:void(0)"
+                                  class="btn n-btn-flat btn-mid btn-clear apply_job"
+                                  id="applying_job"
+                                  style="padding-left: 10px"
+                                >
+                                  <i class="fa fa-map-marker"></i>
+                                  Applied:
+                                  {{
+                                    singleJob && singleJob.creation_date
+                                      | date: "MM-dd-YYYY"
+                                  }}
+                                </a>
+                              </div>
+                            </aside>
+                          </div>
+                        </div>
+                      </div>
+                    </section>
+
+                    <section class="single-job light-grey detail-transparent">
+                      <div class="container">
+                        <div class="row">
+                          <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <div class="single-detail">
+                              <h4>Job Description</h4>
+                              <div>
+                                {{ singleJob && singleJob.job_description }}
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <div class="single-detail">
+                              <h4>Skills Required</h4>
+                              <div *ngFor="let skill of singleJob.skills">
+                                {{ skill }}
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-md-12 col-sm-12 col-xs-12 back-btn">
+                          <a
+                            (click)="
+                              openListing('Workshop', $event, '#f3642c', '#fff')
+                            "
+                            class="n-btn-flat btn-mid"
+                            style="float: right"
+                          >
+                            Back
+                          </a>
+                        </div>
+                      </div>
+                    </section>
+                    <div class="clearfix"></div>
+                  </div>
+                </div>
+              </div>
+
+              <div
+                class="mansi tabcontent"
+                id="Internship"
+                style="position: relative; width: 100%"
+              >
+                <div class="col-md-12 col-sm-12 col-xs-12 back-white">
+                  <div class="user-pic">
+                    <img src="{{ profile_image_path }}" alt="Profile Pic" />
+
+                    <b
+                      class="pull-right emp-profile"
+                      title="Edit Profile"
+                      (click)="editProfile()"
+                    >
+                      <i class="fa fa-pencil la-3x" title="Edit Profile"></i>
+                    </b>
+                    <b
+                      class="pull-right emp-profile mr-10"
+                      title="Change Password"
+                      (click)="changePassword()"
+                    >
+                      <i
+                        title="Change password"
+                        class="fa fa-unlock-alt"
+                        aria-hidden="true"
+                      ></i>
+                    </b>
+                  </div>
+                  <ul class="detail-list">
+                    <li>
+                      <i class="fa fa-user la-3x"></i>
+                      <div class="resume-detail-meta">
+                        <small>Name:</small>
+                        <strong
+                          >{{ userDetails.first_name }}
+                          {{ userDetails.last_name }}</strong
+                        >
+                      </div>
+                    </li>
+                    <li>
+                      <i class="fa fa-calendar la-3x"></i>
+                      <div class="resume-detail-meta">
+                        <small>Date of birth:</small>
+                        <strong>{{ userDetails.dob | date }}</strong>
+                      </div>
+                    </li>
+                    <li>
+                      <i class="fa fa-map-marker la-3x"></i>
+                      <div class="resume-detail-meta">
+                        <small>Residential Address:</small>
+                        <strong>{{ userDetails.residential_address }}</strong>
+                      </div>
+                    </li>
+                    <li>
+                      <i class="fa fa-edit la-3x"></i>
+                      <div class="resume-detail-meta">
+                        <small>Profile Summary:</small>
+                        <strong>{{ userDetails.profile_summary }}</strong>
+                      </div>
+                    </li>
+                    <li>
+                      <i class="fa fa-edit la-3x"></i>
+                      <div class="resume-detail-meta">
+                        <small>Key Skills:</small>
+                        <strong *ngFor="let item of userDetails.skills">{{
+                          item
+                        }}</strong>
+                      </div>
+                    </li>
+
+                    <li>
+                      <i class="fa fa-language la-3x"></i>
+                      <div class="resume-detail-meta">
+                        <small>Language Known: </small
+                        ><strong>{{ userDetails.languages }}</strong>
+                      </div>
+                    </li>
+                    <li>
+                      <i class="fa fa-mars la-3x"></i>
+                      <div class="resume-detail-meta">
+                        <small>Marital Status: </small
+                        ><strong>{{
+                          userDetails.marital_status == 1 ? "Married" : "Single"
+                        }}</strong>
+                      </div>
+                    </li>
+                    <li></li>
+                    <li>
+                      <!-- <div class="file n-btn-flat btn-mid up"> -->
+                      <a
+                        *ngIf="resume_file_path"
+                        class="file n-btn-flat btn-mid up"
+                        href="{{ resume_file_path }}"
+                        target="_blank"
+                      >
+                        View Resume</a
+                      >
+                      <a
+                        *ngIf="!resume_file_path"
+                        class="file n-btn-flat btn-mid up"
+                        (click)="uploadResume()"
+                      >
+                        Resume not Uploaded</a
+                      >
+                      <!-- </div> -->
+                    </li>
+                  </ul>
+                  <ul class="detail-list-emp">
+                    <li>
+                      <i class="fa fa-user-plus la-3x"></i>
+                      <div class="resume-detail-meta">
+                        <small style="width: 100%"
+                          >Employment
+                          <b
+                            class="pull-right add-emp"
+                            title="Add New Employment"
+                            href="javascript:void(0);"
+                            data-toggle="modal"
+                            data-target="#Employment"
+                            (click)="addNewEmployee()"
+                          >
+                            <i
+                              class="fa fa-plus la-3x"
+                              title="Add New Employment"
+                            ></i>
+                          </b>
+                        </small>
+                        <div class="col-sm-12">
+                          <div
+                            *ngFor="let emp of userEmploymentDetails"
+                            class="col-sm-12 text-grey"
+                          >
+                            <h5>{{ emp.designation }}</h5>
+                            <h6>{{ emp.employer }}</h6>
+                            <h6>
+                              {{ emp.start_date | date: "MM-dd-YYYY" }} to
+                              {{
+                                emp.end_date == null
+                                  ? "Present"
+                                  : (emp.end_date | date: "MM-dd-YYYY")
+                              }}
+                            </h6>
+                            <h6
+                              class="edit-icon"
+                              data-toggle="modal"
+                              data-target="#Employment"
+                              (click)="editEmployment(emp._id)"
+                            >
+                              <i class="fa fa-pencil"></i>
+                            </h6>
+                          </div>
+                        </div>
+                      </div>
+                    </li>
+                  </ul>
+
+                  <ul class="detail-list-emp">
+                    <li>
+                      <i class="fa fa-user-plus la-3x"></i>
+                      <div class="resume-detail-meta">
+                        <small style="width: 100%"
+                          >Projects
+                          <b
+                            class="pull-right add-emp"
+                            title="Add New Project"
+                            data-toggle="modal"
+                            data-target="#projects"
+                            (click)="addNewProject()"
+                          >
+                            <i
+                              class="fa fa-plus la-3x"
+                              title="Add New Project"
+                            ></i>
+                          </b>
+                        </small>
+                        <div class="col-sm-12">
+                          <div
+                            *ngFor="let prj of projectDetails"
+                            class="col-sm-12 text-grey"
+                          >
+                            <h5>{{ prj.project_title }}</h5>
+                            <h6>{{ prj.client_name }}</h6>
+                            <h6>
+                              {{ prj.project_description }}
+                            </h6>
+                            <h6
+                              class="edit-icon"
+                              data-toggle="modal"
+                              data-target="#projects"
+                              (click)="editProject(prj._id)"
+                            >
+                              <i class="fa fa-pencil"></i>
+                            </h6>
+                          </div>
+                        </div>
+                      </div>
+                    </li>
+                  </ul>
+
+                  <ul class="detail-list-emp">
+                    <li>
+                      <i class="fa fa-user-plus la-3x"></i>
+                      <div class="resume-detail-meta">
+                        <small style="width: 100%"
+                          >Certifications
+                          <b
+                            class="pull-right add-emp"
+                            title="Add New Certification"
+                            data-toggle="modal"
+                            data-target="#certification"
+                            (click)="addNewCertification()"
+                          >
+                            <i
+                              class="fa fa-plus la-3x"
+                              title="Add New Certification"
+                            ></i>
+                          </b>
+                        </small>
+                        <div class="col-sm-12">
+                          <div
+                            *ngFor="let prj of userCertifications"
+                            class="col-sm-12 text-grey"
+                          >
+                            <h5>{{ prj.certification_name }}</h5>
+                            <h6>
+                              {{ prj.certification_from }}
+                            </h6>
+                            <h6>
+                              {{ prj.year_of_completion_date }}
+                            </h6>
+                            <h6
+                              class="edit-icon"
+                              data-toggle="modal"
+                              data-target="#certification"
+                              (click)="editCertification(prj._id)"
+                            >
+                              <i class="fa fa-pencil"></i>
+                            </h6>
+                          </div>
+                        </div>
+                      </div>
+                    </li>
+                  </ul>
+                  <ul class="detail-list-emp">
+                    <li>
+                      <i class="fa fa-user-plus la-3x"></i>
+                      <div class="resume-detail-meta">
+                        <small style="width: 100%"
+                          >Education
+                          <b
+                            class="pull-right add-emp"
+                            title="Add New Education"
+                            data-toggle="modal"
+                            data-target="#education"
+                            (click)="addNewEducation()"
+                          >
+                            <i
+                              class="fa fa-plus la-3x"
+                              title="Add New Education"
+                            ></i>
+                          </b>
+                        </small>
+                        <div class="col-sm-12">
+                          <div
+                            *ngFor="let edu of userEducation"
+                            class="col-sm-12 text-grey"
+                          >
+                            <h6>
+                              {{ edu.field_of_study }}
+                            </h6>
+                            <h6>
+                              {{ edu.institute_name }}
+                            </h6>
+                            <h6>
+                              {{ edu.country }}
+                            </h6>
+                            <h5>{{ edu.name }}</h5>
+
+                            <h6>{{ edu.course_type }}</h6>
+                            <h6>
+                              {{ edu.year_of_passing }}
+                            </h6>
+
+                            <h6
+                              class="edit-icon"
+                              data-toggle="modal"
+                              data-target="#education"
+                              (click)="editEducation(edu._id)"
+                            >
+                              <i class="fa fa-pencil"></i>
+                            </h6>
+                          </div>
+                        </div>
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+
+              <div
+                class="mansi tabcontent"
+                id="Messages"
+                style="position: relative; width: 100%; display: none"
+              >
+                <div class="n-search-listing n-featured-jobs">
+                  <div class="n-featured-job-boxes">
+                    <div class="n-job-single">
+                      <div class="n-job-detail">
+                        <ul class="list-inline">
+                          <li class="n-job-title-box msg-title-box">
+                            <div class="msg-user-data">
+                              <div class="left-msg-data">
+                                <img src="/assets/images/person-3.png" />
+                                <div class="info-pers">
+                                  <div class="first-r">
+                                    <h3>John Hacking</h3>
+                                    <p class="red-text">1 Hour Ago</p>
+                                  </div>
+                                  <div class="second-r">
+                                    <p>Designation at company name</p>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="right-msg-data">
+                                <i class="fa fa-close"></i>
+                                <i class="fa fa-check"></i>
+                              </div>
+                            </div>
+                            <div class="msg-info-data">
+                              <h4>Hello John</h4>
+                              <p>
+                                loreum ipsum dolor smit amet concetuer
+                                dmit.....<a href="">SEE MORE</a>
+                              </p>
+                            </div>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+
+                    <div class="n-job-single">
+                      <div class="n-job-detail">
+                        <ul class="list-inline">
+                          <li class="n-job-title-box msg-title-box">
+                            <div class="msg-user-data">
+                              <div class="left-msg-data">
+                                <img src="/assets/images/person-3.png" />
+                                <div class="info-pers">
+                                  <div class="first-r">
+                                    <h3>John Hacking</h3>
+                                    <p class="red-text">1 Hour Ago</p>
+                                  </div>
+                                  <div class="second-r">
+                                    <p>Designation at company name</p>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="right-msg-data">
+                                <i class="fa fa-close"></i>
+                                <i class="fa fa-check"></i>
+                              </div>
+                            </div>
+                            <div class="msg-info-data">
+                              <h4>Hello John</h4>
+                              <p>
+                                loreum ipsum dolor smit amet concetuer
+                                dmit.....<a href="">SEE MORE</a>
+                              </p>
+                            </div>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+
+                    <div class="n-job-single">
+                      <div class="n-job-detail">
+                        <ul class="list-inline">
+                          <li class="n-job-title-box msg-title-box">
+                            <div class="msg-user-data">
+                              <div class="left-msg-data">
+                                <img src="/assets/images/person-3.png" />
+                                <div class="info-pers">
+                                  <div class="first-r">
+                                    <h3>John Hacking</h3>
+                                    <p class="red-text">1 Hour Ago</p>
+                                  </div>
+                                  <div class="second-r">
+                                    <p>Designation at company name</p>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="right-msg-data">
+                                <i class="fa fa-close"></i>
+                                <i class="fa fa-check"></i>
+                              </div>
+                            </div>
+                            <div class="msg-info-data">
+                              <h4>Hello John</h4>
+                              <p>
+                                loreum ipsum dolor smit amet concetuer
+                                dmit.....<a href="">SEE MORE</a>
+                              </p>
+                            </div>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+
+                    <div class="n-job-single">
+                      <div class="n-job-detail">
+                        <ul class="list-inline">
+                          <li class="n-job-title-box msg-title-box">
+                            <div class="msg-user-data">
+                              <div class="left-msg-data">
+                                <img src="/assets/images/person-3.png" />
+                                <div class="info-pers">
+                                  <div class="first-r">
+                                    <h3>John Hacking</h3>
+                                    <p class="red-text">1 Hour Ago</p>
+                                  </div>
+                                  <div class="second-r">
+                                    <p>Designation at company name</p>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="right-msg-data">
+                                <i class="fa fa-close"></i>
+                                <i class="fa fa-check"></i>
+                              </div>
+                            </div>
+                            <div class="msg-info-data">
+                              <h4>Hello John</h4>
+                              <p>
+                                loreum ipsum dolor smit amet concetuer
+                                dmit.....<a href="">SEE MORE</a>
+                              </p>
+                            </div>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+
+                    <div class="n-job-single">
+                      <div class="n-job-detail">
+                        <ul class="list-inline">
+                          <li class="n-job-title-box msg-title-box">
+                            <div class="msg-user-data">
+                              <div class="left-msg-data">
+                                <img src="/assets/images/person-3.png" />
+                                <div class="info-pers">
+                                  <div class="first-r">
+                                    <h3>John Hacking</h3>
+                                    <p class="red-text">1 Hour Ago</p>
+                                  </div>
+                                  <div class="second-r">
+                                    <p>Designation at company name</p>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="right-msg-data">
+                                <i class="fa fa-close"></i>
+                                <i class="fa fa-check"></i>
+                              </div>
+                            </div>
+                            <div class="msg-info-data">
+                              <h4>Hello John</h4>
+                              <p>
+                                loreum ipsum dolor smit amet concetuer
+                                dmit.....<a href="">SEE MORE</a>
+                              </p>
+                            </div>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+
+                    <div class="clearfix"></div>
+
+                    <div
+                      class="col-lg-12 col-md-12 col-sm-12 col-xs-12 nopadding"
+                    >
+                      <nav aria-label="Page navigation">
+                        <ul class="pagination">
+                          <li>
+                            <span
+                              aria-current="page"
+                              class="page-numbers current"
+                              >1</span
+                            >
+                          </li>
+                          <li><a class="page-numbers" href="">2</a></li>
+                          <li><a class="page-numbers" href="">3</a></li>
+                          <li><span class="page-numbers dots">…</span></li>
+                          <li><a class="page-numbers" href="">5</a></li>
+                          <li>
+                            <a class="next page-numbers" href=""
+                              >Next &gt;&gt;</a
+                            >
+                          </li>
+                        </ul>
+                      </nav>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div
+                class="mansi tabcontent"
+                id="digiresume"
+                style="position: relative; height: 522px"
+              >
+                <div class="col-md-12 col-sm-12 col-xs-12 back-white">
+                  <div class="btn-toolbar text-right">
+                    <button
+                      type="button"
+                      class="n-btn-flat btn-mid"
+                      (click)="resume1()"
+                      [ngStyle]="{'background-color': isResume1 ? '#edb098' : ''}"
+                    >
+                      Resume 1
+                    </button>
+
+                    <button
+                      type="button"
+                      class="n-btn-flat btn-mid"
+                      (click)="resume2()"
+                      [ngStyle]="{'background-color': !isResume1 ? '#edb098' : ''}"
+                    >
+                      Resume 2
+                    </button>
+                  </div>
+                  
+
+                  <div class="d-flex">
+
+
+                    <div class="digiheading">
+                      <strong class="o-color">Digital Resume Sample</strong>
+                      <p>
+                        Lorem ipsum dolor sit amet, consectetur adipisicing
+                        elit, sed do eiusmod tempor.
+                      </p>
+                    </div>
+                    <div class="digidownload" *ngIf="!isResume1">
+                      <a style="cursor: pointer;"  (click)="makePdf1()" class="digilink">
+                        <b title="Edit Profile" class="emp-profile">
+                          <i
+                            title="Edit Profile"
+                            class="fa fa-download la-3x"
+                          ></i>
+                        </b>
+                        <span >Download Resume</span>
+                      </a>
+                    </div>
+                    <div class="digidownload" *ngIf="isResume1">
+                      <a style="cursor: pointer;" (click)="makePdf2()" class="digilink">
+                        <b title="Edit Profile" class="emp-profile">
+                          <i
+                            title="Edit Profile"
+                            class="fa fa-download la-3x"
+                          ></i>
+                        </b>
+                        <span >Download Resume</span>
+                      </a>
+                    </div>
+                  </div>
+                  <div *ngIf="isResume1" class="res-pic text-center" id="pdfContent" #pdfContent>
+                    <!-- <img src="/assets/images/resume.png" alt="Resume Sample"/>		
+                        				                 -->
+
+                    <section id="r-top">
+                      <div class="container">
+                        <div class="row">
+                          <div class="col-sm-12 r-top-col">
+                            <div class="r-img">
+                              
+                              <img src="{{ profile_image_path }}" alt="Profile Pic" />
+                     
+                              
+                            </div>
+                            <div class="r-top-text">
+                              <h2 class="big-text">
+                                {{ userDetails.first_name }}
+                                {{ userDetails.last_name }}
+                              </h2>
+                              <!-- <em>SOFTWARE EXPERT</em> -->
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </section>
+                    <!-- end -->
+                    <!-- section personal details -->
+                    <section id="r-pdetails">
+                      <div class="container">
+                        <div class="row">
+                          <div class="col-sm-6">
+                            <div class="r-plist">
+                              <ul>
+                                <li>
+                                  <i class="fa fa-phone"></i
+                                  ><span>{{ userDetails.mobile_no }}</span>
+                                </li>
+                                <li>
+                                  <i class="fa fa-map"></i
+                                  ><span>{{
+                                    userDetails.residential_address
+                                  }}</span>
+                                </li>
+                                <li>
+                                  <i class="fa fa-envelope"></i
+                                  >{{ userDetails.email }}
+                                </li>
+                                <!-- <li><i class="fa fa-linkedin"></i> Linkedin: manishkumar</li> -->
+                              </ul>
+                            </div>
+                          </div>
+                          <div class="col-sm-6">
+                            <div class="r-ptext">
+                              <p>
+                               {{userDetails.description}}
+                              </p>
+                              <h2 class="r-heading">AREAS OF EXPERTISE</h2>
+                              <p>
+                              {{userDetails.profile_summary}}
+                              </p>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </section>
+                    <!-- end -->
+                    <!-- section edu details -->
+                    <section id="r-edetails">
+                      <div class="container">
+                        <div class="row">
+                          <div class="col-sm-6">
+                            <div class="r-eheadings">
+                              <h2 class="r-heading">EDUCATIONAL HISTORY</h2>
+                            </div>
+                            <div
+                              class="r-etext1"
+                              *ngFor="let data of userEducation"
+                            >
+                              <h3>{{ data.institute_name }}</h3>
+                              <em
+                                >{{ data.name }}
+                                <span
+                                  >, CLASS OF {{ data.year_of_passing }}</span
+                                ></em
+                              >
+                              <div class="r-elist">
+                                <ul>
+                                  <li>
+                                    <span>FIELD OF STUDY: </span
+                                    >{{ data.field_of_study }}
+                                  </li>
+                                  <li>
+                                    <span>COURSE TYPE: </span
+                                    >{{ data.course_type }}
+                                  </li>
+                                  <li>
+                                    <span>COUNTRY: </span>{{ data.country }}
+                                  </li>
+                                </ul>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="col-sm-6 r-etext2">
+                            <div class="r-eheadings">
+                              <h2 class="r-heading">PROFESSIONAL HISTORY</h2>
+                            </div>
+                            <div
+                              class="r-etext1"
+                              *ngFor="let data of userEmployeement"
+                            >
+                              <h3>{{ data.designation }}</h3>
+                              <!-- <em>{{}}, CLASS OF 2008</em> -->
+                              <div class="r-elist">
+                                <ul>
+                                  <li>
+                                    <span>EMPLOYER: </span>{{ data.employer }}
+                                  </li>
+                                  <li>
+                                    <span>START DATE: </span
+                                    >{{ data.start_date | date }}
+                                  </li>
+                                  <li>
+                                    <SPAN>END DATE: </SPAN
+                                    >{{ data.end_date | date }}
+                                  </li>
+                                </ul>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </section>
+                    <!-- end -->
+                    <!-- section personal details -->
+                    <section id="r-tdetails">
+                      <div class="container">
+                        <div class="row">
+                          <div class="col-sm-8 flex">
+                            <div class="r-theading">
+                              <h2 class="big-text">
+                                CHARACTER <br />REFERCENCES
+                              </h2>
+                            </div>
+                            <div class="r-tlist">
+                              <ul>
+                                <li><strong> ARTHUR CRAWFORD</strong></li>
+                                <li><em>COO, ANICIPLUS TECH</em></li>
+                                <li><em>123-456-789123</em></li>
+                                <li><em>info@quazisite.com</em></li>
+                              </ul>
+                            </div>
+                          </div>
+                          <div class="col-md-4 r-tlist2">
+                            <div class="r-tlist">
+                              <ul>
+                                <li><strong> SUMMER WU</strong></li>
+                                <li><em>COO, ANICIPLUS TECH</em></li>
+                                <li><em>123-456-789123</em></li>
+                                <li><em>info@quazisite.com</em></li>
+                              </ul>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                  <div *ngIf="!isResume1" class="res-pic text-center"  id="content" #content>
+                    <!-- <img src="/assets/images/resume.png" alt="Resume Sample"/>		
+                                               -->
+
+                    <section id="r-top">
+                      <div class="container">
+                        <div class="row">
+                          <div class="col-sm-8 r-top-col">
+                            <div class="r-img">
+                              <img src="{{ profile_image_path }}" alt="Profile Pic" />
+                            </div>
+                            <div class="r-top-text">
+                              <h2 class="big-text">{{userDetails.first_name }} {{userDetails.last_name}}</h2>
+                              <!-- <em>SOFTWARE EXPERT</em> -->
+                            </div>
+                          </div>
+                          <div class="col-sm-4 r-top-col">
+                            <div class="r-top-text2">
+                              <ul>
+                                <li>Phone: {{userDetails.mobile_no}}</li>
+                                <li>Email: {{userDetails.email}}</li>
+                                <!-- <li>Website: andersonlouis.com</li> -->
+                              </ul>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </section>
+                    <!-- end -->
+                    <!-- section personal details -->
+                    <section id="r-pdetails">
+                      <div class="container">
+                        <div class="row">
+                          <div class="col-sm-12 one-line">
+                            <div class="col-sm-3">
+                              <h2 class="middle-text">PROFILE</h2>
+                            </div>
+                            <div class="col-sm-9">
+                              <div class="bar"></div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-sm-3"></div>
+                          <div class="col-sm-9">
+                            <div class="r-text">
+                              <p>
+                               {{userDetails.profile_summary}}
+                              </p>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </section>
+                    <!-- end -->
+                    <!-- section experience details -->
+                    <section id="r-pdetails">
+                      <div class="container">
+                        <div class="row">
+                          <div class="col-sm-12 one-line">
+                            <div class="col-sm-3">
+                              <h2 class="middle-text">EXPERIENCE</h2>
+                            </div>
+                            <div class="col-sm-9">
+                              <div class="bar"></div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="row" *ngFor="let key of userEmployeement">
+                          <div class="col-sm-3">
+                            <h3 class="red-text">{{key.designation}}</h3>
+                          </div>
+                          <div class="col-sm-9">
+                            <div class="r-text">
+                              <h3>{{key.name}}</h3>
+                              <div class="r-elist">
+                                <ul>
+                                  <li><b>Employer: </b>{{key.employer}}</li>
+                                  <li><b>Start date: </b>{{key.start_date | date}}</li>
+                                  <li><b>End date: </b>{{key.end_date | date}}</li>
+                                    </ul>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                     
+                      </div>
+                    </section>
+                    
+                    <!-- end -->
+                    <!-- section skills details -->
+                    <section id="r-pdetails">
+                      <div class="container">
+                        <div class="row">
+                          <div class="col-sm-12 one-line">
+                            <div class="col-sm-3">
+                              <h2 class="middle-text">SKILLS</h2>
+                            </div>
+                            <div class="col-sm-9">
+                              <div class="bar"></div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-sm-3"></div>
+                          <div class="col-sm-9">
+                            <div class="r-text">
+                              <div class="r-elist">
+                                <ul *ngFor="let data of userDetails.skills">
+                                  <li>{{data}}</li>
+                                
+                                </ul>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      
+                      </div>
+                    </section>
+                    <!-- end -->
+                    <!-- section educational details -->
+                    <section id="r-pdetails">
+                      <div class="container">
+                        <div class="row">
+                          <div class="col-sm-12 one-line">
+                            <div class="col-sm-3">
+                              <h2 class="middle-text">EDUCATION</h2>
+                            </div>
+                            <div class="col-sm-9">
+                              <div class="bar"></div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="row" *ngFor="let data of userEducation">
+                          <div class="col-sm-3">
+                            <h3 class="red-text">{{data.name}}</h3>
+                          </div>
+                          <div class="col-sm-9">
+                            <div class="r-text">
+                              <h3>{{data.institute_name}} (Year of passing:{{data.year_of_passing}})</h3>
+                            </div>
+                          </div>
+                        </div>
+  
+                      </div>
+                    </section>
+                    <section id="r-pdetails">
+                      <div class="container">
+                        <div class="row">
+                          <div class="col-sm-12 one-line">
+                            <div class="col-sm-3">
+                              <h2 class="middle-text">Certification</h2>
+                            </div>
+                            <div class="col-sm-9">
+                              <div class="bar"></div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="row" *ngFor="let data of userCertifications">
+                          <div class="col-sm-3">
+                            <h3 class="red-text">{{data.certification_name}}</h3>
+                          </div>
+                          <div class="col-sm-9">
+                            <div class="r-text">
+                              <h3><b>Certification from: </b>{{data.certification_from}}</h3>
+                              <h3><b>Year of completion: </b>{{data.year_of_completion_date}}</h3>
+                            </div>
+                          </div>
+                        </div>
+  
+                      </div>
+                    </section>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div
+  class="modal fade"
+  id="Employment"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="employmentModal"
+  aria-hidden="true"
+>
+  <div class="modal-dialog" role="document">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="cp-spinner cp-skeleton"></div>
+      <div class="modal-header rte">
+        <h4 class="modal-title">{{ modalTitle }}</h4>
+      </div>
+      <form
+        id="qz-forgot-form"
+        novalidate=""
+        [formGroup]="employeeForm"
+        *ngIf="employeeForm"
+      >
+        <div class="modal-body">
+          <div class="form-group">
+            <label>Employer</label>
+            <input
+              placeholder="Employer"
+              class="form-control"
+              type="text"
+              name="qz_employer"
+              id="qz_employer"
+              autocomplete="off"
+              formControlName="employer"
+            />
+          </div>
+
+          <div class="form-group">
+            <label>Designation</label>
+            <input
+              placeholder="Designation"
+              class="form-control"
+              type="text"
+              name="qz_design"
+              id="qz_design"
+              autocomplete="off"
+              formControlName="designation"
+            />
+          </div>
+
+          <div class="form-group">
+            <label>Start Date</label>
+            <input
+              placeholder="Start Date"
+              class="form-control"
+              type="date"
+              name="qz_sdate"
+              id="qz_sdate"
+              autocomplete="off"
+              formControlName="start_date"
+            />
+          </div>
+
+          <div class="form-group">
+            <label>End Date</label>
+            <input
+              placeholder="End Date"
+              class="form-control"
+              type="date"
+              name="qz_edate"
+              id="qz_edate"
+              autocomplete="off"
+              formControlName="end_date"
+            />
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button
+            class="btn n-btn-flat btn-mid btn-block"
+            type="button"
+            id="sb_forgot_submit"
+            (click)="onEmploymentSubmit()"
+          >
+            Submit
+          </button>
+
+          <button
+            class="btn n-btn-flat btn-mid btn-block"
+            type="button"
+            id="sb_forgot_msg"
+            style="top: -3px"
+            data-dismiss="modal"
+            (click)="cancelModal()"
+          >
+            Cancel
+          </button>
+          <button
+            *ngIf="employeeForm.get('_id').value"
+            class="btn n-btn-flat btn-mid btn-block"
+            type="button"
+            id="sb_delete_msg"
+            style="top: -3px"
+            (click)="deleteUserEmployment(employeeForm.get('_id').value)"
+          >
+            Delete
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- Project Modal -->
+<div
+  class="modal fade"
+  id="projects"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="projectmodal"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="cp-spinner cp-skeleton"></div>
+      <div class="modal-header rte">
+        <h2 class="modal-title">{{ modalTitle }}</h2>
+      </div>
+      <form
+        id="qz-forgot-form"
+        novalidate=""
+        [formGroup]="projectForm"
+        *ngIf="projectForm"
+      >
+        <div class="modal-body">
+          <div class="form-group">
+            <label>Title</label>
+            <input
+              placeholder="Project Title"
+              class="form-control"
+              type="text"
+              name="qz_title"
+              id="qz_title"
+              autocomplete="off"
+              formControlName="project_title"
+            />
+          </div>
+
+          <div class="form-group">
+            <label>Client Name</label>
+            <input
+              placeholder="Client Name"
+              class="form-control"
+              type="text"
+              name="qz_client"
+              id="qz_client"
+              autocomplete="off"
+              formControlName="client_name"
+            />
+          </div>
+
+          <div class="form-group">
+            <label>Description</label>
+            <textarea
+              placeholder="Project Description"
+              class="form-control"
+              type="textarea"
+              rows="4"
+              name="qz_desc"
+              id="qz_desc"
+              autocomplete="off"
+              formControlName="project_description"
+            ></textarea>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button
+            class="btn n-btn-flat btn-mid btn-block"
+            type="button"
+            id="sb_forgot_submit"
+            (click)="onProjectSubmit()"
+          >
+            Submit
+          </button>
+          <button
+            class="btn n-btn-flat btn-mid btn-block"
+            type="button"
+            id="sb_forgot_msg1"
+            style="top: -3px"
+            data-dismiss="modal"
+            (click)="cancelModal()"
+          >
+            Cancel
+          </button>
+          <button
+            class="btn n-btn-flat btn-mid btn-block"
+            *ngIf="projectForm.get('_id').value"
+            type="button"
+            id="sb_delete_msg1"
+            style="top: -3px"
+            (click)="deleteUserProject(projectForm.get('_id').value)"
+          >
+            Delete
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- Certification modal -->
+<div
+  class="modal fade"
+  id="certification"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="certificationModal"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="cp-spinner cp-skeleton"></div>
+      <div class="modal-header rte">
+        <h2 class="modal-title">{{ modalTitle }}</h2>
+      </div>
+      <form
+        id="qz-forgot-form"
+        novalidate=""
+        [formGroup]="certificationForm"
+        *ngIf="certificationForm"
+      >
+        <div class="modal-body">
+          <div class="form-group">
+            <label>Name</label>
+            <input
+              placeholder="Certification Name"
+              class="form-control"
+              type="text"
+              name="qz_name"
+              id="qz_name"
+              autocomplete="off"
+              formControlName="certification_name"
+            />
+          </div>
+
+          <div class="form-group">
+            <label>Certification From</label>
+            <input
+              placeholder="Certification From"
+              class="form-control"
+              type="text"
+              name="qz_cfrom"
+              id="qz_cfrom"
+              autocomplete="off"
+              formControlName="certification_from"
+            />
+          </div>
+
+          <div class="form-group">
+            <label>Year Of Completion</label>
+            <input
+              placeholder="Year of Completion"
+              class="form-control"
+              type="text"
+              name="qz_comp"
+              id="qz_comp"
+              autocomplete="off"
+              formControlName="year_of_completion_date"
+            />
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button
+            class="btn n-btn-flat btn-mid btn-block"
+            type="button"
+            id="sb_forgot_submit"
+            (click)="onCertificationSubmit()"
+          >
+            Submit
+          </button>
+          <button
+            class="btn n-btn-flat btn-mid btn-block"
+            type="button"
+            id="sb_forgot_msg2"
+            style="top: -3px"
+            data-dismiss="modal"
+            (click)="cancelModal()"
+          >
+            Cancel
+          </button>
+          <button
+            class="btn n-btn-flat btn-mid btn-block"
+            *ngIf="certificationForm.get('_id').value"
+            type="button"
+            id="sb_delete_msg2"
+            style="top: -3px"
+            (click)="
+              deleteUserCertification(certificationForm.get('_id').value)
+            "
+          >
+            Delete
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<!-- Education modal -->
+<div
+  class="modal fade"
+  id="education"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="educationModal"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="cp-spinner cp-skeleton"></div>
+      <div class="modal-header rte">
+        <h2 class="modal-title">{{ modalTitle }}</h2>
+      </div>
+      <form
+        id="qz-forgot-form"
+        novalidate=""
+        [formGroup]="educationForm"
+        *ngIf="educationForm"
+      >
+        <div class="modal-body">
+          <div class="form-group">
+            <label>Name</label>
+            <input
+              placeholder=" Name"
+              class="form-control"
+              type="text"
+              autocomplete="off"
+              formControlName="name"
+            />
+          </div>
+
+          <div class="form-group">
+            <label>Field of Study</label>
+            <input
+              placeholder="Field of study"
+              class="form-control"
+              type="text"
+              autocomplete="off"
+              formControlName="field_of_study"
+            />
+          </div>
+
+          <div class="form-group">
+            <label>Institute Name</label>
+            <input
+              placeholder="Institute Name"
+              class="form-control"
+              type="text"
+              autocomplete="off"
+              formControlName="institute_name"
+            />
+          </div>
+          <div class="form-group">
+            <label>Country</label>
+            <input
+              placeholder="Country"
+              class="form-control"
+              type="text"
+              autocomplete="off"
+              formControlName="country"
+            />
+          </div>
+          <div class="form-group">
+            <label>Year of Passing</label>
+            <input
+              placeholder="Year of Passing"
+              class="form-control"
+              type="text"
+              autocomplete="off"
+              formControlName="year_of_passing"
+            />
+          </div>
+          <div class="form-group">
+            <label>Course Type</label>
+
+            <select
+              class="form-select"
+              aria-label="Default select example"
+              (click)="changeCourseType($event)"
+              formControlName="course_type"
+            >
+              <option value="null" selected disabled>Select Course Type</option>
+              <option *ngFor="let data of course" [value]="data">
+                {{ data }}
+              </option>
+            </select>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button
+            class="btn n-btn-flat btn-mid btn-block"
+            type="button"
+            id="sb_forgot_submit"
+            (click)="onEducationSubmit()"
+          >
+            Submit
+          </button>
+          <button
+            class="btn n-btn-flat btn-mid btn-block"
+            type="button"
+            id="sb_forgot_msg3"
+            style="top: -3px"
+            data-dismiss="modal"
+            (click)="cancelModal()"
+          >
+            Cancel
+          </button>
+          <button
+            class="btn n-btn-flat btn-mid btn-block"
+            *ngIf="educationForm.get('_id').value"
+            type="button"
+            id="sb_delete_msg3"
+            style="top: -3px"
+            (click)="deleteUserEducation(educationForm.get('_id').value)"
+          >
+            Delete
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

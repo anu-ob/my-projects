@@ -1,0 +1,28 @@
+
+.search-forms form.career-form.mb-60 input {
+  width: 100%;
+  background-color: rgba(255, 255, 255, 0.2);
+  border: 0;
+  padding: 5px 15px;
+  color: #fff;
+  width: 100%;
+  border-radius: 1px;
+  text-align: left;
+  height: auto;
+  background-image: none;
+}
+
+.autocomplete-container .suggestions-container ul li a {
+  padding: 5px !important;
+  display: block;
+  cursor: pointer;
+  color: rgba(0, 0, 0, 0.87);
+  font-size: 3px;
+  border-bottom: 1px solid #ccc;
+}
+.ng-autocomplete .autocomplete-container {
+  height: auto;
+}
+.search-forms form.career-form.mb-60 .ng-autocomplete .autocomplete-container input.ng-untouched.ng-pristine.ng-valid::placeholder {
+    color: #fff;
+  }

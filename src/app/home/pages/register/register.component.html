@@ -1,0 +1,192 @@
+<div class="how-section1 section login-bg-img">
+  <div class="row">
+    <div class="col-md-12 how-img sec1-left-img">               
+    </div>
+  </div>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12 col-sm-12 col-xs-12 no-padding">
+        <div class="section-container-left">
+          <div class="heading-title">
+            <h2 class="white">Account Register</h2>
+            <p>Having great skills and specialty in software quality assurance, software testing, software requirement.</p>
+            
+          </div>
+        </div>
+       </div>
+    </div>
+  </div>
+</div>
+<div class="section2 section">
+  <div class="row">
+    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 col-md-offset-3 col-lg-offset-3 mx-auto">
+      <div class="login-sec mb-60">
+          <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 ">
+              <div class="qz-form-left">
+              <div class="login-form-heading">
+                <h3 class="white">New User Register</h3>
+              </div>
+              <form id="qz-login-form-data" novalidate="" [formGroup]="signupForm" (ngSubmit)="onSubmit(signupForm.value)">
+                <div class="col-lg-6 col-md-12 col-sm-6 col-xs-12">
+                  <div class="form-group">
+                     <input placeholder="Username" class="form-control" type="text" name="qz_reg_id" id="qz_reg_id" autocomplete="off" formControlName="user_name">
+                     <div class="invalid-feedback" *ngIf="isSubmitted && signupForm.controls.user_name.errors?.required">
+                      <sup>*</sup>This field is required
+                    </div>  
+                    </div>
+                </div>
+                <!-- <div class="col-lg-6 col-md-12 col-sm-6 col-xs-12">
+                  <div class="form-group">
+                     <input placeholder="Your First Name" class="form-control" type="text" name="qz_reg_fname" id="qz_reg_fname" autocomplete="off">
+                  </div>
+                </div>
+                <div class="col-lg-6 col-md-12 col-sm-6 col-xs-12">
+                  <div class="form-group">
+                     <input placeholder="Your Last Name" class="form-control" type="text" name="qz_reg_lname" id="qz_reg_lname" autocomplete="off">
+                  </div>
+                </div> -->
+                <div class="col-lg-6 col-md-12 col-sm-6 col-xs-12">
+                  <div class="form-group">
+                     <input placeholder="Your email" class="form-control" type="email" name="qz_reg_email" id="qz_reg_email" autocomplete="off" formControlName="email">
+                     <div class="invalid-feedback" *ngIf="isSubmitted && signupForm.controls.email.errors?.required">
+                      <sup>*</sup>This field is required
+                    </div>
+                    <div class="invalid-feedback" *ngIf="signupForm.controls.email.errors?.pattern">
+                      <sup>*</sup>Please enter a valid email.
+                     </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-12 col-sm-6 col-xs-12">
+                  <div class="form-group">
+                     <input placeholder="your password" class="form-control" type="password" data-parsley-required="true" data-parsley-error-message="Please enter your password." name="sb_reg_password" id="sb_reg_password" autocomplete="off" formControlName="password">
+                     <div class="invalid-feedback" *ngIf="isSubmitted && signupForm.controls.password.errors?.required">
+                      <sup>*</sup>This field is required
+                    </div>
+                    </div>
+                 </div>
+                 <div class="col-lg-6 col-md-12 col-sm-6 col-xs-12">
+                  <div class="form-group">
+                     <input placeholder="your confirm password" class="form-control" type="password" data-parsley-required="true" data-parsley-error-message="Please enter your confirm password." name="sb_reg_cpassword" id="sb_reg_cpassword" autocomplete="off" formControlName="matchPassword">
+                     <div class="invalid-feedback" *ngIf="isSubmitted && signupForm.controls.matchPassword.errors?.required">
+                      <sup>*</sup>This field is required
+                      
+                    </div>
+                    <div class="invalid-feedback" *ngIf="signupForm.controls.matchPassword.errors?.confirmedValidator">
+                      Password and Confirm Password must match.
+                    </div>
+                    </div>
+                 </div>
+                 <!-- <div class="col-lg-6 col-md-12 col-sm-6 col-xs-12">
+                  <div class="form-group">
+                    <!-- <label class="col-lg-12 col-md-12 col-sm-12 col-xs-12 control-label" for="lang">Upload Image</label> --
+                     <input placeholder="Image" class="form-control file" type="file" name="qz_reg_img" id="qz_reg_pic" autocomplete="off" accept=".jpg,.gif,.png" >
+                  </div>
+                </div> -->
+                <div class="col-lg-6 col-md-12 col-sm-6 col-xs-12">
+                  <div class="form-group">
+                     <input placeholder="Mobile Number" type="number" maxlength="10" class="form-control" type="phone" name="qz_reg_phone" id="qz_reg_phone" autocomplete="off" formControlName="mobile_no">
+                     <div class="invalid-feedback" *ngIf="isSubmitted && signupForm.controls.mobile_no.errors?.required">
+                      <sup>*</sup>This field is required
+                    </div>
+                     
+                    </div>
+                </div>
+                 <!-- <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                  <div class="form-group">
+                     <textarea placeholder="Description" class="form-control" data-parsley-required="true" data-parsley-error-message="Please enter your description." name="sb_reg_desc" id="sb_reg_desc" autocomplete="off"></textarea>
+                     <!-- <input placeholder="Description" class="form-control" type="text" data-parsley-required="true" data-parsley-error-message="Please enter your description." name="sb_reg_desc" id="sb_reg_desc" autocomplete="off"> --
+                  </div>
+                 </div>
+                 <div class="col-lg-6 col-md-12 col-sm-6 col-xs-12">
+                    <div class="form-group">
+                      <!-- <label>Education</label> --
+                      <select class="form-select" aria-label="Default select example">
+                        <option selected>Select Education</option>
+                        <option value="1">M.C.A</option>
+                        <option value="2">M.B.A</option>
+                        <option value="3">B.Sc</option>
+                      </select>
+                    </div>
+                  </div>
+                 <div class="col-lg-6 col-md-12 col-sm-6 col-xs-12">
+                  <div class="form-group">
+                     <input placeholder="Experience" class="form-control" type="text" data-parsley-required="true" data-parsley-error-message="Please enter your Experience." name="sb_reg_exp" id="sb_reg_exp" autocomplete="off">
+                  </div>
+                 </div> -->
+
+                 <!-- <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                  <div class="btn-group" id="status">
+                    <a href="javascript:void(0)" class="btn btn-primary btn-default" aria-current="page">Corporate</a>
+                    <a href="javascript:void(0)" class="btn btn-primary btn-default active">Candidate</a>
+                  </div>
+                 </div> 
+                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="form-group">
+                      <input placeholder="Phone Number" class="form-control" type="Number" data-parsley-type="digits" name="_custom_[PhoneNumber]" value="">
+                    </div>
+                  </div>
+                  <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="form-group">
+                      <label>Location</label>
+                      <select class="form-select" aria-label="Default select example">
+                        <option selected>Open this select menu</option>
+                        <option value="1">Canada</option>
+                        <option value="2">USA</option>
+                        <option value="3">UAE</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="col-md-12 col-xs-12 col-sm-6">
+                    <div class="form-group">
+                      <label>Date </label>
+                      <input type="text" value="" name="_custom_[Date]" class="datepicker-custom-feilds form-control">
+                    </div>
+                  </div>-->
+
+                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                  <re-captcha
+                  (resolved)="resolved($event)" formControlName="reCaptcha"
+                  siteKey="6Ldh8j0cAAAAAKYdaVZF68svMjnSn3pCqh4nEgSF"
+                   (error)="onError($event)" errorMode="handled"
+                ></re-captcha>
+                <div class="invalid-feedback" *ngIf="isSubmitted && signupForm.controls.reCaptcha.errors?.required">
+                  <sup>*</sup>This field is required
+                  
+                </div>
+                 </div>           
+                  <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">                   
+                  <div class="buttons-area">                           
+                     <div class="form-group check-div">
+                      <div class="icheckbox_square" style="position: relative;">
+                        <input type="checkbox" name="icheck_box" class="input-icheck-others" data-parsley-required="true" data-parsley-error-message="Please accept terms and conditions." data-parsley-multiple="icheck_box" formControlName="termNconditions">
+                      </div>
+                        <p> I Agree <a href="#" target="_blank">terms and conditions.</a>
+                          
+                        </p>
+                       
+                        
+                      
+                     
+                    </div> 
+                    <div class="invalid-feedback" *ngIf="isSubmitted && signupForm.controls.termNconditions.errors?.required">
+                      <sup>*</sup>This field is required
+                      
+                  </div> 
+                                                                   
+                     <button class="n-btn-flat btn-mid pull-right " type="submit" id="sb_register_submit">Register</button>
+                  </div>
+                 </div>
+                  <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="signup-area">
+                       <p>Already have account?<a [routerLink]="['/login']"> Login</a></p>
+                    </div>
+                  </div>
+               </form>
+              </div>
+            </div>
+          </div>
+      </div>
+    </div>
+  </div>
+</div>

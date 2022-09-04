@@ -1,0 +1,15 @@
+.container-fluid {
+    padding: 5px 50px;
+  }
+  h2 {
+    font-size: 24px;
+    text-transform: uppercase;
+    color: #303030;
+    font-weight: 600;
+    margin-bottom: 5px;
+  }
+ .ul-list ul li{
+     list-style:circle;
+     text-align: left;
+ }
+ 

@@ -1,0 +1,146 @@
+
+<div class="col-sm-9 col-sm-offset-3 col-md-9 col-md-offset-3 main">
+    <!-- <h1 class="page-header">Dashboard</h1> -->
+
+    <section class="row text-center placeholders">
+      <div class="col-6 col-sm-3">
+        <div class="panel panel-info">
+          <div class="panel-heading">Total Corporate Users</div>
+          <div class="panel-body">
+            <h4>{{totalCorporate}}</h4>
+            <a [routerLink]="['/corporate-listing']">View All</a>
+          </div>
+        </div>
+      </div>
+      <div class="col-6 col-sm-3">
+        <div class="panel panel-success">
+          <div class="panel-heading">Total Students</div>
+          <div class="panel-body">
+            <h4>{{totalStudent}}</h4>
+           <a [routerLink]="['/students-listing']">View All</a>
+          </div>
+        </div>
+      </div>
+      <div class="col-6 col-sm-3">
+        <div class="panel panel-warning">
+          <div class="panel-heading">Total Companies</div>
+          <div class="panel-body">
+            <h4>{{totalJobCount}}</h4>
+            <a [routerLink]="['/jobs-listing']">View All</a>
+          </div>
+        </div>
+      </div>
+      <div class="col-6 col-sm-3">
+        <div class="panel panel-danger">
+          <div class="panel-heading">Messages</div>
+          <div class="panel-body">
+            <h4>123</h4>
+            <a href="">View All</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  
+    <h1 class="sub-header">
+      <div class="btn-group pull-right" role="group" aria-label="Basic example">
+        <ngx-print-element #element="element">
+          <button  type="button" class="btn btn-primary" (click)="element.print('corporateList')">Print</button>
+        </ngx-print-element>
+        <!-- <button type="button" class="btn btn-primary" (click)="ExportTOExcel()">Export</button> -->
+    </div>
+     Latest Corporate's List
+    </h1>
+    <div class="table-responsive admin-table">
+      <ngx-datatable id="corporateList" #corporateList class="table table-striped table-bordered" [rows]="list" [columnMode]="'force'" [headerHeight]="50"
+      [rowHeight]="50" [limit]="6">
+    
+      <ngx-datatable-column name="Username">
+        <ng-template let-row="row" ngx-datatable-cell-template>
+          {{row.user_name}}
+        </ng-template>
+      </ngx-datatable-column>
+    
+      <ngx-datatable-column name="Email">
+        <ng-template let-row="row" ngx-datatable-cell-template>
+          {{row.email}}
+        </ng-template>
+      </ngx-datatable-column>
+    
+      
+      <ngx-datatable-column name="Mobile">
+        <ng-template let-row="row" ngx-datatable-cell-template>
+          {{row.mobile_no}}
+        </ng-template>
+      </ngx-datatable-column>
+      
+      <ngx-datatable-column name="IsVerified">
+        <ng-template let-row="row" ngx-datatable-cell-template>
+          {{row.is_email_verified}}
+        </ng-template>
+      </ngx-datatable-column>
+      <ngx-datatable-column name="View">
+        <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
+          <a title="View details" href="javascript:void">
+              <i class="fa fa-eye text-info"  data-toggle="modal" data-target="#exampleModal" (click)="openModal(row)"></i>
+          </a>
+         
+      </ng-template>
+      </ngx-datatable-column>
+    
+    
+    </ngx-datatable>
+      </div>
+
+      <h1 class="sub-header">
+        <div class="btn-group pull-right" role="group" aria-label="Basic example">
+          <ngx-print-element #element="element">
+            <button  type="button" class="btn btn-primary" (click)="element.print('studentList')">Print</button>
+            <!-- <button type="button" class="btn btn-primary">Export</button> -->
+          </ngx-print-element>
+      </div>
+        Latest Student's List
+      </h1>
+      <div class="table-responsive admin-table">
+        <ngx-datatable id="studentList" class="table table-striped table-bordered" [rows]="studentList" [columnMode]="'force'" [headerHeight]="50"
+        [rowHeight]="50" [limit]="6">
+      
+        <ngx-datatable-column name="Username">
+          <ng-template let-row="row" ngx-datatable-cell-template>
+            {{row.user_name}}
+          </ng-template>
+        </ngx-datatable-column>
+      
+        <ngx-datatable-column name="Email">
+          <ng-template let-row="row" ngx-datatable-cell-template>
+            {{row.email}}
+          </ng-template>
+        </ngx-datatable-column>
+      
+        
+        <ngx-datatable-column name="Mobile">
+          <ng-template let-row="row" ngx-datatable-cell-template>
+            {{row.mobile_no}}
+          </ng-template>
+        </ngx-datatable-column>
+        
+        <ngx-datatable-column name="IsVerified">
+          <ng-template let-row="row" ngx-datatable-cell-template>
+            {{row.is_email_verified}}
+          </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column name="View">
+          <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
+            <a title="View details" href="javascript:void">
+                <i class="fa fa-eye text-info"  data-toggle="modal" data-target="#exampleModal" (click)="openModal(row)"></i>
+            </a>
+           
+        </ng-template>
+        </ngx-datatable-column>
+      
+      
+      </ngx-datatable>
+      </div>
+
+   
+  </div>

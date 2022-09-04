@@ -1,0 +1,17 @@
+ 
+
+<div class="col-sm-3 col-md-3 sidebar collapse" id="sidebar">
+  <div class="list-group text-left">
+    <a [ngClass]="{'active': selectedItem == 1}" (click)="selectedItem=1"  [routerLink]="['/admin']" class="list-group-item active">
+      <span class="fa fa-fw fa-dashboard"></span> Dashboard</a>
+    <a [ngClass]="{'active': selectedItem == 2}" (click)="selectedItem=2"  [routerLink]="['/admin/jobs-listing']" class="list-group-item">
+      <span class="fa fa-fw fa-file"></span> Jobs Listing </a>
+    <a [ngClass]="{'active': selectedItem == 3}" (click)="selectedItem=3"  [routerLink]="['/admin/students-listing']" class="list-group-item">
+      <span class="fa fa-fw fa-user"></span> Student's Listing</a>
+ 
+    
+    <a class="list-group-item"  [ngClass]="{'active': selectedItem == 5}" (click)="selectedItem=5"  [routerLink]="['/admin/corporate-listing']">
+      <span class="fa fa-fw fa-group"></span> Corporate Listing</a>
+    <!-- <a href="#" class="list-group-item"><span class="fa fa-fw fa-dashboard"></span> Orders <span class="badge badge-dark badge-pill pull-right">14</span></a> -->
+  </div>
+</div>
